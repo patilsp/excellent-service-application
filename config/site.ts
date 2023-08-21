@@ -1,21 +1,21 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "SP",
+  name: "Excellent Service",
   description:
-    "Hi There This is Santosh Patil",
+    "Best water purifire service in india",
   mainNav: [
     {
       title: "Home",
       href: "/",
     },
     // {
-    //   title: "Skills",
-    //   href: "/skills",
+    //   title: "Sign In",
+    //   href: "/sign-in",
     // },
     // {
-    //   title: "Projects",
-    //   href: "/projects",
+    //   title: "sign-up",
+    //   href: "/sign-up",
     // },
     // {
     //   title: "Education",

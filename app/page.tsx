@@ -14,9 +14,9 @@ const IndexPage = () => {
  
 
   return (
-    <div className="container">
-      <h1>Home</h1>
-    </div>    
+    <div className="container relative">
+        Home
+    </div>
   );
 };
 

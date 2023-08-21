@@ -18,8 +18,8 @@ export default function NotFound() {
             className='object-contain'
           />
         </div>
-        <div className='mt-4 flex w-full justify-center'>
-          <Link href="/" className="dark:highlight-white/20 flex h-12 w-full items-center justify-center rounded-lg bg-slate-900 px-6 font-semibold text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 dark:bg-sky-500 dark:hover:bg-sky-400 sm:w-auto" >Return Home</Link>
+        <div className='w-100 mt-4 flex justify-center'>
+          <Link href="/" className="inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" >Return Home</Link>
         </div>
     </div>
   )

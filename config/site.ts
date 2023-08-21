@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig
 export const siteConfig = {
   name: "Excellent Service",
   description:
-    "Best water purifire service in india",
+    "Clean, Clear, Confident: Transforming Lives One Drop at a Time",
   mainNav: [
     {
       title: "Home",

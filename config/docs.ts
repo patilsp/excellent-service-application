@@ -1,8 +1,9 @@
-import { MainNavItem, SidebarNavItem } from "types/nav"
+// config/docs.ts
+import { NavItem } from "types/nav";
 
 interface DocsConfig {
-  mainNav: MainNavItem[]
-  sidebarNav: SidebarNavItem[]
+  mainNav: NavItem[];
+  sidebarNav: NavItem[];
 }
 
 export const docsConfig: DocsConfig = {
@@ -11,21 +12,7 @@ export const docsConfig: DocsConfig = {
       title: "Home",
       href: "/",
     },
-    {
-      title: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      title: "Products",
-      href: "/products",
-    },
-    {
-      title: "Customers",
-      href: "/customers",
-    },
-   
-    
-    
+    // ... other mainNav items ...
   ],
   sidebarNav: [
     {
@@ -35,17 +22,9 @@ export const docsConfig: DocsConfig = {
           title: "Help",
           href: "/helps",
         },
-        {
-          title: "Sign In",
-          href: "/sign-in",
-        },
-      
-        {
-          title: "Settings",
-          href: "/settings",
-        },
-        
+        // ... other sidebarNav sub-items ...
       ],
     },
+    // ... other sidebarNav items ...
   ],
-}
+};

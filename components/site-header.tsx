@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
@@ -8,12 +10,22 @@ import { MainNav } from "@/components/main-nav"
 import { MobileNav } from "@/components/mobile-nav"
 import { ModeToggle } from "@/components/mode-toggle"
 import { buttonVariants } from "@/registry/new-york/ui/button"
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useAuth, useUser } from "@clerk/nextjs"
+
 
 export function SiteHeader() {
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isSignedIn, user } = useUser();
+
+  if (!isLoaded || !userId) {
+    return null;
+  }
+
+
   return (
     <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
       <div className="container flex h-14 items-center">
+
         <MainNav />
         <MobileNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
@@ -22,10 +34,17 @@ export function SiteHeader() {
           </div>
           <nav className="flex items-center gap-2">
               <ModeToggle />
-              <UserButton afterSignOutUrl="/sign-in" />
-              <Link href='sign-in' className='inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
-                Sign In
-              </Link>
+
+              {userId == null ? (
+                  <Link href='sign-in' className='inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
+                    Sign In
+                  </Link>
+                ) : (                  
+                  <UserButton afterSignOutUrl="/sign-in" />
+                )}
+                    
+             
+              
           </nav>
         </div>
       </div>

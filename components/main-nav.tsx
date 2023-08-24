@@ -67,10 +67,10 @@ export function MainNav() {
           Tasks
         </Link>
         <Link
-          href="/settings"
+          href="/forms"
           className={cn(
             "transition-colors hover:text-foreground/80",
-            pathname === "/settings" ? "text-foreground" : "text-foreground/60"
+            pathname === "/forms" ? "text-foreground" : "text-foreground/60"
           )}
         >
           Settings

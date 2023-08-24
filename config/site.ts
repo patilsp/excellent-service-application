@@ -9,22 +9,26 @@ export const siteConfig = {
       title: "Home",
       href: "/",
     },
-    // {
-    //   title: "Sign In",
-    //   href: "/sign-in",
-    // },
-    // {
-    //   title: "sign-up",
-    //   href: "/sign-up",
-    // },
-    // {
-    //   title: "Education",
-    //   href: "/education",
-    // },
-    // {
-    //   title: "Work Experience",
-    //   href: "/work-experience",
-    // },
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      title: "Customers",
+      href: "/customers",
+    },
+    {
+      title: "Products",
+      href: "/products",
+    },
+    {
+      title: "Tasks",
+      href: "/tasks",
+    },
+     {
+      title: "Settings",
+      href: "/forms",
+    },
   ],
   links: {
     twitter: "https://twitter.com/patilsp",

@@ -12,7 +12,23 @@ export const docsConfig: DocsConfig = {
       title: "Home",
       href: "/",
     },
-    // ... other mainNav items ...
+    {
+      title: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      title: "Customers",
+      href: "/customers",
+    },
+    {
+      title: "Products",
+      href: "/products",
+    },
+    {
+      title: "Tasks",
+      href: "/tasks",
+    },
+    
   ],
   sidebarNav: [
     {
@@ -21,6 +37,14 @@ export const docsConfig: DocsConfig = {
         {
           title: "Help",
           href: "/helps",
+        },
+        {
+          title: "Settings",
+          href: "/forms",
+        },
+        {
+          title: "Sign Up",
+          href: "/sign-up",
         },
         // ... other sidebarNav sub-items ...
       ],

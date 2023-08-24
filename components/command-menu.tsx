@@ -67,7 +67,22 @@ export function CommandMenu({ ...props }: DialogProps) {
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          
+          <CommandGroup heading="Links">
+            {docsConfig.mainNav
+              .filter((navitem) => !navitem.external)
+              .map((navItem) => (
+                <CommandItem
+                  key={navItem.href}
+                  value={navItem.title}
+                  onSelect={() => {
+                    runCommand(() => router.push(navItem.href as string))
+                  }}
+                >
+                  <FileIcon className="mr-2 h-4 w-4" />
+                  {navItem.title}
+                </CommandItem>
+              ))}
+          </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Theme">
             <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>

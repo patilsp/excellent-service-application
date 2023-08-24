@@ -40,8 +40,8 @@ const CreatePrompt = () => {
         router.push("/");
       }
     } catch (error) {
-      // console.log(error);
-      toast.error(error);
+      console.log(error);
+      // toast.error(error);
     } finally {
       setIsSubmitting(false);
     }

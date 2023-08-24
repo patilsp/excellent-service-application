@@ -1,18 +1,19 @@
 /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   reactStrictMode: true,
-//   experimental: {
-//     appDir: true,
-//   },
-// }
-
-// export default nextConfig
-
-const path = require('path');
-
-module.exports = {
-  webpack: (config) => {
-    config.resolve.alias['@'] = path.join(__dirname, 'path/to/your/source/folder');
-    return config;
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ["mongoose"],
   },
-};
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    }
+    return config
+  }
+}
+
+module.exports = nextConfig

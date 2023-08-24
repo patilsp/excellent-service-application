@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import Form from "@/components/form";
+import Form from "@/components/Form";
 import { useAuth } from "@clerk/nextjs";
 
 const CreatePrompt = () => {

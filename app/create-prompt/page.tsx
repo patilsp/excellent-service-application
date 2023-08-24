@@ -13,7 +13,7 @@ const CreatePrompt = () => {
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({ firstname: "", lastname: "", email: "", address:"", phoneno: "", state:"", city: "", pincode: "", dateofbirth:"", tag: "", });
 
-  const createPrompt = async (e) => {
+    const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 

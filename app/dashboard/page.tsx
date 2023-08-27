@@ -29,9 +29,9 @@ export const metadata: Metadata = {
 export default function DashboardPage() {
   return (
     <>
-      
+    <div className="border p-4">
       <div className="flex-col md:flex">
-        <div className="border-b">
+        <div className="mb-2 border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
             <div className="ml-auto flex items-center space-x-4">
@@ -189,6 +189,7 @@ export default function DashboardPage() {
           </Tabs>
         </div>
       </div>
+    </div>
     </>
   )
 }

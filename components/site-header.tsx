@@ -17,9 +17,9 @@ export function SiteHeader() {
   const { isLoaded, userId, sessionId, getToken } = useAuth();
   const { isSignedIn, user } = useUser();
 
-  if (!isLoaded || !userId) {
-    return null;
-  }
+  // if (!isLoaded || !userId) {
+  //   return null;
+  // }
 
 
   return (

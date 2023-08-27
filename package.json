@@ -14,7 +14,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.21.13",
+    "@clerk/nextjs": "^4.17.3",
     "@faker-js/faker": "^8.0.2",
     "@hookform/resolvers": "^3.3.0",
     "@lottiefiles/lottie-js": "^0.4.1",
@@ -42,6 +42,7 @@
     "lucide-react": "0.105.0-alpha.4",
     "mongoose": "^7.4.4",
     "next": "^13.4.4",
+    "next-intl": "^2.20.0",
     "next-themes": "^0.2.1",
     "radix-ui": "^1.0.1",
     "react": "^18.2.0",

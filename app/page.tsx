@@ -6,14 +6,12 @@ import Link from 'next/link';
 import { siteConfig } from '@/config/site';
 import { buttonVariants } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import Lottie from"lottie-react";
-import animationData from "../assets/men.json";
 
 const IndexPage = () => {
 
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className='mb-2 flex justify-center'>
+       <div className='mb-2 flex justify-center'>
            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">Coming Soon!
                Stay tuned for our launch !
            </h1>

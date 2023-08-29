@@ -2,6 +2,8 @@ import { promises as fs } from "fs"
 import path from "path"
 import { Metadata } from "next"
 import Image from "next/image"
+import Link from "next/link"
+
 import { z } from "zod"
 import { PlusCircledIcon } from "@radix-ui/react-icons"
 import { Button } from "@/registry/new-york/ui/button"
@@ -38,15 +40,22 @@ export default async function CustomerPage() {
               Here&apos;s a list of your customers for this month!
             </p>
           </div>
-          <div className="ml-auto mr-4">
-                        <Button>
-                          <PlusCircledIcon className="mr-2 h-4 w-4" />
-                          Add Customer
-                        </Button>
-                      </div>
+          <div className="ml-auto">
+              <Link href='create-customer' className='inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
+                <PlusCircledIcon className="mr-2 h-4 w-4" />
+                Add Customer
+              </Link>           
+
+          </div>
         </div>
         <DataTable data={customers} columns={columns} />
       </div>
+
+
+     
+
+
+
     </>
   )
 }

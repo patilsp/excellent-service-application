@@ -26,11 +26,11 @@ export const columns: ColumnDef<Customer>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
-        className="translate-y-[2px]"
+        className="translate-y-[2px]" 
       />
     ),
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     accessorKey: "id",
@@ -38,8 +38,8 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Customer ID" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     accessorKey: "name",
@@ -47,8 +47,8 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Customer Name" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("name")}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     accessorKey: "email",
@@ -56,8 +56,8 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Email ID" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("email")}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     accessorKey: "phone",
@@ -65,8 +65,8 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Phone Number" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("phone")}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     accessorKey: "address",
@@ -74,8 +74,8 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Address" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("address")}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     accessorKey: "status",
@@ -83,8 +83,8 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("status")}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    enableSorting: true,
+    enableHiding: true,
   },
 
   

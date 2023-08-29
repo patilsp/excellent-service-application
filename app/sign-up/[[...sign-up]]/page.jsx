@@ -1,7 +1,7 @@
 import React from 'react'
 import { SignUp } from '@clerk/nextjs'
 import Lottie from"lottie-react";
-import animationData from "../assets/men.json";
+import animationData from "@/assets/animation1.json";
 
 const SignUpPage = () => {
   return (

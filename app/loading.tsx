@@ -1,14 +1,14 @@
 "use client";
 import React from 'react';
-import Lottie from"lottie-react";
-import animationData from "../assets/loader.json";
+import Lottie from "lottie-react";
+import animationData from "../assets/loading.json";
 
-export default function loading() {
+export default function Loading() {
   return (
-    <div>
-         <div className="h-full text-center"> 
-            <Lottie animationData={animationData} />                
-          </div>
+    <div className="flex h-screen items-center justify-center">
+      <div style={{ width: '200px', height: '200px' }}>
+        <Lottie animationData={animationData} />
+      </div>
     </div>
-  )
+  );
 }

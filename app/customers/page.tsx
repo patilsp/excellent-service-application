@@ -1,3 +1,7 @@
+'use client';
+
+import { useState, useEffect } from "react";
+
 import { promises as fs } from "fs"
 import path from "path"
 import { Metadata } from "next"
@@ -9,25 +13,32 @@ import { PlusCircledIcon } from "@radix-ui/react-icons"
 import { Button } from "@/registry/new-york/ui/button"
 import { columns } from "./components/columns"
 import { DataTable } from "./components/data-table"
-import { customersSchema } from "./data/schema"
 
 export const metadata: Metadata = {
   title: "customers",
   description: "A customers and issue tracker build using Tanstack Table.",
 }
 
-async function getCustomers() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), "app/customers/data/customers.json")
-  )
+export default async function CustomerPage() {  
 
-  const customers = JSON.parse(data.toString())
+  const [allCustomers, setAllCustomers] = useState([]);
 
-  return z.array(customersSchema).parse(customers)
-}
+  const fetchCustomers = async () => {
+    const response = await fetch("/api/customer");
+    const data = await response.json();
 
-export default async function CustomerPage() {
-  const customers = await getCustomers()
+    const transformedCustomers = data.map(customer => ({
+      ...customer,
+      id: customer._id,
+    }));
+
+    setAllCustomers(transformedCustomers);
+  };
+
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
+
 
   return (
     <>
@@ -48,14 +59,8 @@ export default async function CustomerPage() {
 
           </div>
         </div>
-        <DataTable data={customers} columns={columns} />
+        <DataTable data={allCustomers} columns={columns} />
       </div>
-
-
-     
-
-
-
     </>
   )
 }

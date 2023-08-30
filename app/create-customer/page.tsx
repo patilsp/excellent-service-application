@@ -33,7 +33,7 @@ const CreateCustomer = () => {
   const { isSignedIn, user } = useUser();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ name: "", email: "", address:"", phone: "", status:"" });
+  const [post, setPost] = useState({ name: "", email: "", address:"", phone: "", status:"", dateofbirth:"" });
 
   const createCustomer = async (e) => {
     e.preventDefault();
@@ -48,6 +48,7 @@ const CreateCustomer = () => {
           address: post.address,
           phone: post.phone,
           status: post.status,
+          dateofbirth:post.dateofbirth,
         }),
       });
 

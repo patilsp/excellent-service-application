@@ -2,11 +2,11 @@ import Customer from "@/models/customer";
 import { connectToDB } from "@/utils/database";
 
 export const POST = async (request) => {
-    const { name, email, phone, address, status } = await request.json();
+    const { name, email, phone, address, dateofbirth, status } = await request.json();
 
     try {
         await connectToDB();
-        const newCustomer = new Customer({ name, email, phone, address, status });
+        const newCustomer = new Customer({ name, email, phone, address, dateofbirth, status });
 
         await newCustomer.save();
         return new Response(JSON.stringify(newCustomer), { status: 201 })

@@ -81,6 +81,17 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
           />
         </div>
 
+      <div className="flex gap-10">
+        <div className="grid gap-2">
+          <Label htmlFor="description">Date Of Birth</Label>
+          <Input
+            value={post.dateofbirth}
+            onChange={(e) => setPost({ ...post, dateofbirth: e.target.value })}
+            placeholder='Enter Date of Birth'
+            required
+            className='input '
+          />
+        </div>
 
         <div className="grid gap-2">
             <Label htmlFor="status">Status</Label>
@@ -99,8 +110,9 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
               </SelectContent>
             </Select>
           </div>
+        </div>
 
-        <div className='flex-end mx-3 mb-5 gap-4'>
+        <div className='flex-end mx-3 mb-5 mt-3 gap-4'>
           <Link href='/customers' className='text-sm text-gray-500'>
             Cancel
           </Link>

@@ -1,6 +1,10 @@
 import { Schema, model, models } from 'mongoose';
 
 const CustomerSchema = new Schema({
+  
+  id: {
+    type: String,
+  },
   name: {
     type: String,
     required: [true, 'Customer Name is required.'],
@@ -13,6 +17,10 @@ const CustomerSchema = new Schema({
     type: String,
   },
   address: {
+    type: String,
+  },
+  dateofbirth:
+  {
     type: String,
   },
   status: {

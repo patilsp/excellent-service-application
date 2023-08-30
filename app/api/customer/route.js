@@ -1,4 +1,4 @@
-import Prompt from "@/models/customer";
+import Customer from "@/models/customer";
 import { connectToDB } from "@/utils/database";
 
 export const GET = async (request) => {

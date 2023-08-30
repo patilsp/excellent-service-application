@@ -1,16 +1,12 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { Metadata } from "next";
+import React from 'react';
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { columns } from "./components/columns";
 import { DataTable } from "./components/data-table";
-
-export const metadata: Metadata = {
-  title: "customers",
-  description: "A customers and issue tracker build using Tanstack Table.",
-};
 
 export default function CustomerPage() {  
   const [allCustomers, setAllCustomers] = useState([]);

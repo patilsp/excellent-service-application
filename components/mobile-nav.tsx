@@ -1,24 +1,33 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link, { LinkProps } from "next/link"
-import { useRouter } from "next/navigation"
-import { ViewVerticalIcon } from "@radix-ui/react-icons"
-import { usePathname } from "next/navigation"
-import { docsConfig } from "@/config/docs"
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
-import { Button } from "@/registry/new-york/ui/button"
-import { ScrollArea } from "@/registry/new-york/ui/scroll-area"
-import { Sheet, SheetContent, SheetTrigger } from "@/registry/new-york/ui/sheet"
+import * as React from "react";
+import Link, { LinkProps } from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ViewVerticalIcon } from "@radix-ui/react-icons";
+import { usePathname } from "next/navigation";
+import { useAuth, useUser } from "@clerk/nextjs"; 
+import { docsConfig } from "@/config/docs";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { Icons } from "@/components/icons";
+import { Button } from "@/registry/new-york/ui/button";
+import { ScrollArea } from "@/registry/new-york/ui/scroll-area";
+import { Sheet, SheetContent, SheetTrigger } from "@/registry/new-york/ui/sheet";
 
 export function MobileNav() {
-  const [open, setOpen] = React.useState(false)
-  const pathname = usePathname()
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isSignedIn, user } = useUser();
+
+  const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+
+  const userName = user?.fullName || "User Name";
+  const userProfileImage = user?.profileImageUrl || "/images/avatar.png";
+  const userEmail = user?.email || "";
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet classNme="bg-gray-200" open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
           variant="ghost"
@@ -28,17 +37,27 @@ export function MobileNav() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="pr-0">
+      <SheetContent side="left" className="w-full bg-white">
         <MobileLink
           href="/"
-          className="flex items-center"
+          className="flex items-start p-4"
           onOpenChange={setOpen}
         >
-          <Icons.logo className="mr-2 h-4 w-4" />
-          <span className="font-bold">{siteConfig.name}</span>
+          <Image
+            src={userProfileImage}
+            className="size-6 rounded-lg border object-contain "
+            width={50}
+            height={50}
+            alt="user profile image"
+           
+          />
+          <div className="grid gap-2">
+            <span className="text_primary ml-3 text-2xl font-bold">{userName}</span>
+            <span className="ml-3 text-sm font-bold text-gray-600">{userName}</span>
+          </div>
         </MobileLink>
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <div className="flex flex-col space-y-3">
+        <ScrollArea className="my-4 h-[calc(100vh-12rem)] flex-1 pb-10 pl-6">
+          <div className="flex flex-col space-y-4">
             {docsConfig.mainNav?.map(
               (item) =>
                 item.href && (
@@ -46,46 +65,24 @@ export function MobileNav() {
                     key={item.href}
                     href={item.href}
                     onOpenChange={setOpen}
+                    className="rounded-md p-1 text-xl font-semibold text-slate-600 hover:bg-indigo-600 hover:text-white active:bg-indigo-600 active:text-white"
                   >
                     {item.title}
                   </MobileLink>
                 )
             )}
           </div>
-          <div className="flex flex-col space-y-2">
-            {docsConfig.sidebarNav.map((item, index) => (
-              <div key={index} className="flex flex-col space-y-3 pt-6">
-                <h4 className="font-medium">{item.title}</h4>
-                {item?.items?.length &&
-                  item.items.map((item) => (
-                    <React.Fragment key={item.href}>
-                      {!item.disabled &&
-                        (item.href ? (
-                          <MobileLink
-                            href={item.href}
-                            onOpenChange={setOpen}
-                            className="text-muted-foreground"
-                          >
-                            {item.title}
-                          </MobileLink>
-                        ) : (
-                          item.title
-                        ))}
-                    </React.Fragment>
-                  ))}
-              </div>
-            ))}
-          </div>
         </ScrollArea>
+     
       </SheetContent>
     </Sheet>
-  )
+  );
 }
 
 interface MobileLinkProps extends LinkProps {
-  onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
-  className?: string
+  onOpenChange?: (open: boolean) => void;
+  children: React.ReactNode;
+  className?: string;
 }
 
 function MobileLink({
@@ -95,18 +92,18 @@ function MobileLink({
   children,
   ...props
 }: MobileLinkProps) {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Link
       href={href}
       onClick={() => {
-        router.push(href.toString())
-        onOpenChange?.(false)
+        router.push(href.toString());
+        onOpenChange?.(false);
       }}
       className={cn(className)}
       {...props}
     >
       {children}
     </Link>
-  )
+  );
 }

@@ -17,14 +17,14 @@ export function SiteHeader() {
   const { isLoaded, userId, sessionId, getToken } = useAuth();
   const { isSignedIn, user } = useUser();
 
-  // if (!isLoaded || !userId) {
-  //   return null;
-  // }
+  if (!isLoaded || !userId) {
+    return null;
+  }
 
 
   return (
-    <header className="supports-backdrop-blur:bg-background/60 bg-background/95 sticky top-0 z-50 w-full border-b backdrop-blur">
-      <div className="container flex h-14 items-center">
+    <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 shadow backdrop-blur">
+      <div className="flex h-14 items-center px-2">
 
         <MainNav />
         <MobileNav />

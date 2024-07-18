@@ -13,7 +13,12 @@ const UserSchema = new Schema({
   },
   image: {
     type: String,
-  }
+  }, 
+  bio: {
+    type: String,
+    maxlength: 160,
+  },
+  
 });
 
 const User = models.User || model("User", UserSchema);

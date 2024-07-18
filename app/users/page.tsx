@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function accountForm() {
+function page() {
   return (
     <div>
-      account form
-      
+      users
     </div>
   )
 }
 
+export default page

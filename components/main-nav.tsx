@@ -16,7 +16,7 @@ export function MainNav() {
   return (
     <div className="mr-4 hidden w-full items-center justify-center md:flex">
       
-      <nav className="flex items-center space-x-6 text-sm font-medium">
+      <nav className="flex items-center space-x-2  text-sm font-medium">
         <Link
           href="/"
           className={cn(

@@ -5,7 +5,7 @@ import { Table } from "@tanstack/react-table"
 
 import { Button } from "@/registry/new-york/ui/button"
 import { Input } from "@/registry/new-york/ui/input"
-import { DataTableViewOptions } from "@/app/customers/components/data-table-view-options"
+import { DataTableViewOptions } from "@/app/complains/components/data-table-view-options"
 
 import { priorities, statuses } from "../data/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
@@ -23,12 +23,12 @@ export function DataTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Search Customers..."
+          placeholder="Search Complaints..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[250px] lg:w-[250px]"
+          className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn("status") && (
           <DataTableFacetedFilter

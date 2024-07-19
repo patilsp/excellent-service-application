@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CustomerForm from "@/components/CustomerForm";
@@ -32,8 +32,15 @@ const CreateCustomer = () => {
   const { isLoaded, userId, getToken } = useAuth();
   const { isSignedIn, user } = useUser();
 
+  useEffect(() => {
+    if (isLoaded && isSignedIn && userId) {
+      setPost((prevPost) => ({ ...prevPost, userId }));
+    }
+  }, [isLoaded, isSignedIn, userId]);0
+
+
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ name: "", email: "", address:"", phone: "", status:"", dateofbirth:"" });
+  const [post, setPost] = useState({ userId:"", name: "", email: "", address:"", phone: "", status:"", dateofbirth:"" });
 
   const createCustomer = async (e) => {
     e.preventDefault();
@@ -43,6 +50,7 @@ const CreateCustomer = () => {
       const response = await fetch("/api/customer/new", {
         method: "POST",
         body: JSON.stringify({
+          userId: post.userId,
           name: post.name,
           email: post.email,
           address: post.address,
@@ -52,9 +60,9 @@ const CreateCustomer = () => {
         }),
       });
 
-      if (response.ok) {
-        router.push("/customers");
+      if (response.ok) {       
         toast.success("Customer has been created! 🔥");
+        router.push("/customers");
       }
       
     } catch (error) {

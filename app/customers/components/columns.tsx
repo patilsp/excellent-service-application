@@ -37,7 +37,7 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Customer ID" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
     enableSorting: true,
     enableHiding: true,
   },
@@ -46,7 +46,7 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Customer Name" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("name")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
     enableSorting: true,
     enableHiding: true,
   },
@@ -55,7 +55,7 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Email ID" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
     enableSorting: true,
     enableHiding: true,
   },
@@ -64,16 +64,16 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Phone Number" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("phone")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("phone")}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
     accessorKey: "address",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Address" />
+      <DataTableColumnHeader column={column} title="Customer Address" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("address")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("address")}</div>,
     enableSorting: true,
     enableHiding: true,
   },
@@ -82,7 +82,7 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("status")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("status")}</div>,
     enableSorting: true,
     enableHiding: true,
   },

@@ -1,8 +1,9 @@
-
 "use client"
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { CalendarIcon } from "@radix-ui/react-icons"
+import { format } from "date-fns"
 
 import { Button } from "@/registry/new-york/ui/button"
 import {
@@ -23,21 +24,60 @@ import {
   SelectValue,
 } from "@/registry/new-york/ui/select"
 import { Textarea } from "@/registry/new-york/ui/textarea"
+import { Popover, PopoverContent, PopoverTrigger } from "@/registry/new-york/ui/popover"
+import { Calendar } from "@/registry/new-york/ui/calendar"
+import { useAuth, useUser } from '@clerk/nextjs';
+
+
+export function DatePickerDemo({ date, setDate }) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className="w-full justify-start text-left font-normal"
+        >
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {date ? format(date, "PPP") : <span>Pick a date</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  )
+}
 
 const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
+  const [date, setDate] = useState(post.dateofbirth ? new Date(post.dateofbirth) : undefined)
+  const { isLoaded, userId } = useAuth();
+  const { isSignedIn } = useUser();
+  
+  useEffect(() => {
+    if (isLoaded && isSignedIn && userId) {
+      setPost((prevPost) => ({ ...prevPost, userId }));
+    }
+  }, [isLoaded, isSignedIn, setPost, userId]);
+
+
+  const handleStatusChange = (value) => {
+    setPost({ ...post, status: value })
+  }
+  
   return (
-    <section className='flex-center mb-5 w-full max-w-full flex-col'>
+    <section className='mb-5 flex w-full max-w-full flex-col items-center justify-center px-4'>
       <h1 className='head_text text-center'>
         <span className='fs-36 green_gradient'>{type} Customer</span>
       </h1>
-      {/* <p className='desc max-w-md text-center'>
-        {type} and share amazing prompts with the world, and let your
-        imagination run wild with any AI-powered platform
-      </p> */}
-        
+      
       <form
         onSubmit={handleSubmit}
-        className='glassmorphism mt-10 flex w-full max-w-2xl flex-col gap-7 md:w-1/2'
+        className='glassmorphism mt-10 flex w-full max-w-2xl flex-col gap-7 rounded-lg border border-gray-200 p-6 shadow-lg md:w-3/4 lg:w-1/2'
       >
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
@@ -46,7 +86,7 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
             onChange={(e) => setPost({ ...post, name: e.target.value })}
             placeholder='Enter customer Name'
             required
-            className='input '
+            className='input'
           />
         </div>
         <div className="grid gap-2">
@@ -62,6 +102,8 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
         <div className="grid gap-2">
           <Label htmlFor="phone">Phone Number</Label>
           <Input
+            type='tel'
+            pattern='[0-9]*'
             value={post.phone}
             onChange={(e) => setPost({ ...post, phone: e.target.value })}
             placeholder='Enter customer phone number'
@@ -71,49 +113,39 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="description">Address</Label>
+          <Label htmlFor="address">Address</Label>
           <Textarea
             value={post.address}
             onChange={(e) => setPost({ ...post, address: e.target.value })}
             placeholder='Enter customer address'
             required
-            className='form_textarea '
+            className='form_textarea'
           />
         </div>
 
-      <div className="flex gap-10">
-        <div className="grid gap-2">
-          <Label htmlFor="description">Date Of Birth</Label>
-          <Input
-            value={post.dateofbirth}
-            onChange={(e) => setPost({ ...post, dateofbirth: e.target.value })}
-            placeholder='Enter Date of Birth'
-            required
-            className='input '
-          />
-        </div>
+        <div className="flex flex-col gap-2 md:flex-row md:gap-10">
+          <div className="grid w-full gap-2">
+            <Label htmlFor="dateofbirth">Date Of Birth</Label>
+            <DatePickerDemo date={date} setDate={setDate} />
+          </div>
 
-        <div className="grid gap-2">
+          <div className="grid w-full gap-2">
             <Label htmlFor="status">Status</Label>
-            <Select defaultValue="1">
-              <SelectTrigger
-               value={post.status}
-               onChange={(e) => setPost({ ...post, status: e.target.value })}
-               className="line-clamp-1 w-[160px] truncate"
-              >
+            <Select defaultValue={post.status || "Active"} onValueChange={handleStatusChange}>
+              <SelectTrigger className="line-clamp-1 w-full truncate">
                 <SelectValue placeholder="Select Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="1">Active</SelectItem>
-                <SelectItem value="2">In Active</SelectItem>
-                <SelectItem value="3">Out Of Warranty</SelectItem>
+                <SelectItem value="Active">Active</SelectItem>
+                <SelectItem value="In Active">In Active</SelectItem>
+                <SelectItem value="Out Of Warranty">Out Of Warranty</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
 
-        <div className='flex-end mx-3 mb-5 mt-3 gap-4'>
-          <Link href='/customers' className='text-sm text-gray-500'>
+        <div className='my-4 flex justify-center gap-4'>
+          <Link href='/customers' className='flex items-center rounded bg-red-400 p-1 px-4 text-sm text-primary-foreground shadow hover:bg-red-600'>
             Cancel
           </Link>
 
@@ -127,8 +159,7 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
         </div>
       </form>
     </section>
-  );
-};
+  )
+}
 
-export default CustomerForm;
-
+export default CustomerForm

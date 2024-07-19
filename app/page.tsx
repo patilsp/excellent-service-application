@@ -15,6 +15,7 @@ import AppDemo from "@/components/app-demo"
 export default function IndexPage() {
   return (
    <div>
+    
     <Banner />
     {/* <Download />
     <Benefits />

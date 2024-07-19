@@ -33,12 +33,15 @@ export function SiteHeader() {
         
         <MobileNav />
         
-        <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
-          <ModeToggle />
+        <div className="flex flex-1 items-center justify-end space-x-4 md:justify-end">
+          {/* <ModeToggle /> */}
+          <Link href="/dashboard" className="flex justify-center rounded-md border bg-white p-1 px-2  font-medium text-black shadow   transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+                Dashboard
+             
+            </Link>
 
-          {/* Conditional rendering based on authentication status */}
           {userId == null ? (
-            <Link href="/sign-in" className="flex h-8 justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+            <Link href="/sign-in" className="flex w-20 justify-center rounded-md border bg-white p-1 font-medium text-black shadow   transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
                 Sign In
              
             </Link>

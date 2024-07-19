@@ -9,6 +9,8 @@ import { SiteFooter } from "@/components/site-footer"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'react-hot-toast';
+
 
 export const metadata: Metadata = {
   title: {
@@ -47,6 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <SiteFooter />
             </div>
             <TailwindIndicator />
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

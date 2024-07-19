@@ -39,14 +39,13 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
         body: JSON.stringify({
           name: complaint.name,
           mobile: complaint.mobile,
-          
           note: complaint.note,
         }),
       });
 
       if (response.ok) {
-        router.push("/");
         toast.success("Complaint has been registered successfully! 🔥");
+        router.push("/");        
         setComplaint({
           name: "",
           mobile: "",
@@ -66,8 +65,8 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
 
   return (
     <section className='flex-center mb-5 w-full flex-col'>
-      <h1 className='head_text text-center'>
-        <span className='fs-36 green_gradient'>Sign Up and get 7 Days Free Trial</span>
+      <h1 className='head_text py-2 text-center text-sm'>
+        Sign Up and get 7 Days Free Trial
       </h1>
         
       <form

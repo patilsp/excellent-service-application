@@ -168,6 +168,9 @@ html {
 }
 
 
+.logo-tricker-image{
+  @apply h-8 w-auto;
+}
 
 
 
@@ -355,4 +358,16 @@ p.label {
   text-align: right;
   padding-right: 10px;
   opacity: 0.6;
+}
+
+/* Add this CSS to your global styles or a relevant CSS module */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: flex;
+  gap: 14px;
+  animation: marquee 20s linear infinite;
 }

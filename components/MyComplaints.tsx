@@ -1,9 +1,9 @@
 "use client";
 
-import { useSession } from "@clerk/nextjs"; // Update import to use Clerk
+import { useSession } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import ComplaintCard from "@components/ComplaintCard"; // Import your complaint card component
+import ComplaintCard from "@components/ComplaintCard";
 
 const MyComplaints = () => {
   const router = useRouter();

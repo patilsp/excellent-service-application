@@ -40,7 +40,7 @@ const CreateCustomer = () => {
 
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ userId:"", name: "", email: "", address:"", phone: "", status:"", dateofbirth:"" });
+  const [post, setPost] = useState({ userId:"", name: "", email: "", address:"", phone: "", status:"", dateofbirth:"", area:"", pincode:"" });
 
   const createCustomer = async (e) => {
     e.preventDefault();
@@ -59,6 +59,8 @@ const CreateCustomer = () => {
           phone: post.phone,
           status: post.status,
           dateofbirth:post.dateofbirth,
+          area:post.area,
+          pincode:post.pincode,
         }),
       });
 

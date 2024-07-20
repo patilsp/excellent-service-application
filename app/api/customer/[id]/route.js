@@ -16,50 +16,38 @@ export const GET = async (request, { params }) => {
 
 
 export const PATCH = async (request, { params }) => {
-
-
+    
     if (!params.id) {
-        return new Response("Customer ID is missing", { status: 400 });
+      return new Response("Customer ID is missing", { status: 400 });
     }
-    
     const { name, email, phone, address, dateofbirth, status } = await request.json();
-
-    console.log('Received data:', { name, email, phone, address, dateofbirth, status }); // Debugging
-
     
-    if (!name || !email || !phone || !dateofbirth || !address || !status) {
-        return new Response("Missing required fields", { status: 400 });
+    if (!name || !email || !phone || !address || !status) {
+      return new Response("Missing required fields", { status: 400 });
     }
-
+    
     try {
-        // Connect to the database
-        await connectToDB();
-
-        // Find the existing customer by ID
-        const existingCustomer = await Customer.findById(params.id);
-
-        if (!existingCustomer) {
-            return new Response("Customer not found", { status: 404 });
-        }
-
-        // Update the customer with new data
-        existingCustomer.name = name;
-        existingCustomer.email = email;
-        existingCustomer.phone = phone;
-        existingCustomer.address = address;
-        existingCustomer.dateofbirth = dateofbirth;
-        existingCustomer.status = status;
-
-        // Save the updated customer
-        await existingCustomer.save();
-
-        return new Response("Successfully updated the Customer", { status: 200 });
+      await connectToDB();
+      const existingCustomer = await Customer.findById(params.id);
+      if (!existingCustomer) {
+        return new Response("Customer not found", { status: 404 });
+      }
+      
+      existingCustomer.name = name;
+      existingCustomer.email = email;
+      existingCustomer.phone = phone;
+      existingCustomer.address = address;
+      existingCustomer.dateofbirth = dateofbirth;
+      existingCustomer.status = status;
+      
+      await existingCustomer.save();
+      return new Response("Successfully updated the Customer", { status: 200 });
     } catch (error) {
-        console.error("Error updating customer:", error); // Log the error for debugging
-        return new Response("Error Updating Customer", { status: 500 });
+      console.error("Error updating customer:", error);
+      return new Response("Error Updating Customer", { status: 500 });
     }
-};
-
+  };
+  
 
 export const DELETE = async (request, { params }) => {
     console.log("Request Parameters:", params); // Log the parameters

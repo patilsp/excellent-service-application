@@ -1,14 +1,14 @@
 import { Schema, model, models } from 'mongoose';
 
 const CustomerSchema = new Schema({
+
   id: {
     type: String,
-  },  
+  },
   userId: {
     type: String,
-    required: true, 
   },
-  customerId:{
+  customerId: {
     type: String,
   },
   name: {
@@ -17,7 +17,7 @@ const CustomerSchema = new Schema({
   },
   phone: {
     type: String,
-    required: [true, 'Customer Phone is required.'], // Corrected message
+    required: [true, 'Customer Name is required.'],
   },
   email: {
     type: String,
@@ -25,14 +25,19 @@ const CustomerSchema = new Schema({
   address: {
     type: String,
   },
-  dateofbirth: {
-    type: Date, // Changed to Date type
+  dateofbirth:
+  {
+    type: String,
   },
   status: {
     type: String,
   },
-}, {
-  timestamps: true, // Adds createdAt and updatedAt fields
+  area:{
+    type: String,
+  },
+  pincode: {
+    type: String,
+  },
 });
 
 const Customer = models.Customer || model('Customer', CustomerSchema);

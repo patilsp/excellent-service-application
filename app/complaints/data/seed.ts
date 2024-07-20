@@ -12,8 +12,8 @@ const complains = Array.from({ length: 100 }, () => ({
 }))
 
 fs.writeFileSync(
-  path.join(__dirname, "customer.json"),
+  path.join(__dirname, "complaint.json"),
   JSON.stringify(complains, null, 2)
 )
 
-console.log("✅ Customers data generated.")
+console.log("✅ Complaints data generated.")

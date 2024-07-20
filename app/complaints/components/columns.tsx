@@ -1,6 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/registry/new-york/ui/checkbox";
-import { complaints } from "../data/complaints";
 import { Complaint } from "../data/schema";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
@@ -24,8 +23,8 @@ export const columns: ColumnDef<Complaint>[] = [
         className="translate-y-[2px]"
       />
     ),
-    enableSorting: true,
-    enableHiding: true,
+    enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: "id",
@@ -34,7 +33,7 @@ export const columns: ColumnDef<Complaint>[] = [
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
     enableSorting: true,
-    enableHiding: true,
+    enableHiding: false,
   },
   {
     accessorKey: "name",
@@ -43,7 +42,7 @@ export const columns: ColumnDef<Complaint>[] = [
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("name")}</div>,
     enableSorting: true,
-    enableHiding: true,
+    enableHiding: false,
   },
   {
     accessorKey: "mobile",
@@ -52,7 +51,7 @@ export const columns: ColumnDef<Complaint>[] = [
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("mobile")}</div>,
     enableSorting: true,
-    enableHiding: true,
+    enableHiding: false,
   },
   {
     accessorKey: "note",
@@ -61,11 +60,13 @@ export const columns: ColumnDef<Complaint>[] = [
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("note")}</div>,
     enableSorting: true,
-    enableHiding: true,
+    enableHiding: false,
   },
- 
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
+    enableSorting: false,
+    enableHiding: false,
   },
 ];

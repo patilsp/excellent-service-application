@@ -91,7 +91,7 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
             className='input'
           />
         </div>
-        <div className="flex flex-col gap-2 md:flex-row md:gap-10">
+        <div className="flex flex-col gap-4 md:flex-row md:gap-10">
           <div className="grid w-full gap-2">
             <Label htmlFor="email">Email ID</Label>
             <Input
@@ -145,6 +145,31 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
             className='form_textarea'
           />
         </div>
+        <div className="flex flex-col gap-4 md:flex-row md:gap-10">
+          <div className="grid w-full gap-2">
+            <Label htmlFor="area">Place</Label>
+            <Input
+              value={post.area}
+              onChange={(e) => setPost({ ...post, area: e.target.value })}
+              placeholder='Enter customer Home Address'
+              required
+              className='input'
+            />
+          </div>
+          <div className="grid w-full gap-2">
+            <Label htmlFor="pincode">Pin Code</Label>
+            <Input
+              type='tel'
+              pattern='[0-9]*'
+              value={post.pincode}
+              onChange={(e) => setPost({ ...post, pincode: e.target.value })}
+              placeholder='Enter customer pin code'
+              required
+              className='input'
+            />
+          </div>
+        </div>
+
         <div className='my-4 flex justify-center gap-4'>
           <Link href='/customers' className='flex items-center rounded bg-red-400 p-1 px-4 text-sm text-primary-foreground shadow hover:bg-red-600'>
             Cancel

@@ -15,6 +15,10 @@ const UpdateCustomer = () => {
     email: "",
     phone: "",
     address: "",
+    dateofbirth: "",
+    customerId: "",
+    area: "",
+    picode: "",
   });
   const [submitting, setIsSubmitting] = useState(false);
 
@@ -40,45 +44,48 @@ const UpdateCustomer = () => {
   
 // console.log(customerId);
 
-  const updateCustomer = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const updateCustomer = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    if (!customerId) { // Corrected to customerId
-      alert("Missing CustomerId!");
-      setIsSubmitting(false);
-      return;
+  if (!customerId) {
+    alert("Missing CustomerId!");
+    setIsSubmitting(false);
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/customer/${customerId}`, { 
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        address: customer.address,
+        dateofbirth: customer.dateofbirth,
+        area: customer.area,
+        pincode: customer.pincode,
+      }),
+    });
+
+    const responseData = await response.json(); // Parse response as JSON
+    if (response.ok) {
+      toast.success(responseData.message || "Customer has been updated! 🔥"); // Use response message
+      router.push("/customers");
+    } else {
+      throw new Error(responseData.message || "Failed to update customer"); // Include error message from API
     }
+  } catch (error) {
+    toast.error(`Failed to update customer! ${error.message}`);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
-    try {
-      const response = await fetch(`/api/customer/${customerId}`, { 
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: customer.name,
-          email: customer.email,
-          phone: customer.phone,
-          address: customer.address,
-          dateofbirth: customer.dateofbirth,
-        }),
-      });
 
-      if (response.ok) {
-        toast.success("Customer has been updated! 🔥");
-        router.push("/customers"); 
-      } else {
-        throw new Error("Failed to update customer");
-      }
-    } catch (error) {
-      // console.error("Error updating customer:", error);
-      toast.error("Failed to update customer!", error);
-
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <CustomerForm

@@ -54,13 +54,13 @@ export function MainNav() {
           Products
         </Link>
         <Link
-          href="/tasks"
+          href="/complaints"
           className={cn(
             "link transition-colors hover:text-foreground/80",
-            pathname === "/tasks" ? "text-foreground" : "text-foreground/60"
+            pathname === "/complaints" ? "text-foreground" : "text-foreground/60"
           )}
         >
-          Tasks
+          Complaints
         </Link>
         <Link
           href="/forms"

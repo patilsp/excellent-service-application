@@ -29,11 +29,16 @@ export const statuses = [
   {
     value: "Active",
     label: "Active",
-    icon: StopwatchIcon,
+    icon: CheckCircledIcon,
   },
   {
     value: "Inactive",
     label: "Inactive",
+    icon: StopwatchIcon,
+  },
+  {
+    value: "Warranty",
+    label: "Warranty",
     icon: CheckCircledIcon,
   },
   {

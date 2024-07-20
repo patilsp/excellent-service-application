@@ -46,10 +46,10 @@ export default function Banner() {
   };
 
   return (
-    <section className="relative h-screen overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url('/images/banner1.jpg')` }}>
+    <section className=" overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url('/images/banner1.jpg')` }}>
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <div className="relative  grid h-full items-center justify-center py-10 md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="relative  w-full items-center justify-center py-10 md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative mt-10">
           <motion.div
             initial={{ opacity: 0, x: -100 }}

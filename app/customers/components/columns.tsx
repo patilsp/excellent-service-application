@@ -37,9 +37,13 @@ export const columns: ColumnDef<Customer>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Customer ID" />
     ),
-    cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
+    cell: ({ row }) => {
+      const id = row.getValue("id");
+      const formattedId = Number.isInteger(id) ? `comp-${id}` : `comp-${parseInt(id, 12)}`;
+      return <div className="w-[80px]">{formattedId}</div>;
+    },
     enableSorting: true,
-    enableHiding: true,
+    enableHiding: false,
   },
   {
     accessorKey: "name",
@@ -74,6 +78,24 @@ export const columns: ColumnDef<Customer>[] = [
       <DataTableColumnHeader column={column} title="Customer Address" />
     ),
     cell: ({ row }) => <div className="">{row.getValue("address")}</div>,
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
+    accessorKey: "area",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Customer Place" />
+    ),
+    cell: ({ row }) => <div className="">{row.getValue("area")}</div>,
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
+    accessorKey: "pincode",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Customer PinCode" />
+    ),
+    cell: ({ row }) => <div className="">{row.getValue("pincode")}</div>,
     enableSorting: true,
     enableHiding: true,
   },

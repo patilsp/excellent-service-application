@@ -11,6 +11,8 @@ const customers = Array.from({ length: 100 }, () => ({
   status: faker.helpers.arrayElement(statuses).value,
   phone: faker.helpers.arrayElement(phones).value,
   address: faker.helpers.arrayElement(addresses).value,
+  area: faker.helpers.arrayElement(areaes).value,
+  pincode: faker.helpers.arrayElement(pincodees).value,
 }))
 
 fs.writeFileSync(

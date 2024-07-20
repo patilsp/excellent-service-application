@@ -1,27 +1,32 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
-import { useState, useEffect } from "react";
-
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { columns } from "./components/columns";
 import { DataTable } from "./components/data-table";
 
 export default function CustomerPage() {  
   const [allComplaints, setAllComplaints] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const fetchComplaints = async () => {
-    const response = await fetch("/api/complaint");
-    const data = await response.json();
+    setLoading(true); // Start loading
+    try {
+      const response = await fetch("/api/complaint");
+      const data = await response.json();
+      
+      const transformedComplaints = data.map((complaint, index) => ({
+        ...complaint,
+        id: complaint._id.toString(),
+      }));
 
-
-    const transformedComplaints = data.map((complaint, index) => ({
-      ...complaint,
-      id: complaint._id.toString(),
-    }));
-
-    setAllComplaints(transformedComplaints);
+      setAllComplaints(transformedComplaints);
+    } catch (error) {
+      console.error("Failed to fetch complaints:", error);
+    } finally {
+      setLoading(false); // End loading
+    }
   };
 
   useEffect(() => {
@@ -44,7 +49,26 @@ export default function CustomerPage() {
           </Link>           
         </div>
       </div>
-      <DataTable data={allComplaints} columns={columns} />
+
+      {loading ? (
+        <div className="flex h-32 items-center justify-center">
+          <svg
+            className="h-8 w-8 animate-spin text-primary"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2v0M12 22v0M22 12h0M2 12h0M4.2 4.2h0M19.8 19.8h0M4.2 19.8h0M19.8 4.2h0" />
+          </svg>
+        </div>
+      ) : (
+        <DataTable data={allComplaints} columns={columns} />
+      )}
     </div>
   );
 }

@@ -17,35 +17,47 @@ const RegisterComplaint = () => {
     mobile: "",
     city: "",
     note: "",
+    complaintType: "",
+    model:"",
   });
 
-  const createComplaint = async (e) => {
-    e.preventDefault();
+  const createComplaint = async (data) => {
+    if (submitting) return; // Prevent multiple submissions
+  
     setIsSubmitting(true);
-
+  
     try {
       const response = await fetch("/api/complaint/new", {
         method: "POST",
-        body: JSON.stringify({
-          name: complaint.name,
-          mobile: complaint.mobile,
-          city: complaint.city,
-          note: complaint.note,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
-
+  
       if (response.ok) {
-        router.push("/complaints");
         toast.success("Complaint has been registered successfully! 🔥");
+        setComplaint({
+          name: "",
+          mobile: "",
+          note: "",
+          model: "",
+          complaintType: "",
+        });
+        setTimeout(() => setOpen(false), 2000); // Close modal after 2 seconds
       } else {
-        toast.error("Failed to register complaint.");
+        const errorData = await response.json(); // Get error details from response
+        toast.error(`Failed to register complaint: ${errorData.message || "Unknown error"}`);
       }
     } catch (error) {
+      console.error("An error occurred while submitting the complaint:", error);
       toast.error("An error occurred.");
     } finally {
       setIsSubmitting(false);
     }
   };
+  
+    
 
   return (
     <ComplaintForm

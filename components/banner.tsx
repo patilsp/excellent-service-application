@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
@@ -15,7 +16,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/new-york/ui/dialog"
+} from "@/registry/new-york/ui/dialog";
+
+import Lottie from "lottie-react";
+import animationData from "/assets/call-center.json";
 
 export default function Banner() {
   const [submitting, setIsSubmitting] = useState(false);
@@ -23,6 +27,8 @@ export default function Banner() {
     name: "",
     mobile: "",
     note: "",
+    complaintType: "",
+    model: "",
   });
   const [open, setOpen] = useState(false);
 
@@ -44,20 +50,22 @@ export default function Banner() {
           name: "",
           mobile: "",
           note: "",
+          model:"",
+          complaintType:"",
         });
-        setOpen(false); // Close modal on successful submission
+        setTimeout(() => setOpen(false), 2000); // Close modal after 2 seconds
       } else {
-        toast.error("Failed to register complaint.");
+        console.log(error("Failed to register complaint."));
       }
     } catch (error) {
-      toast.error("An error occurred.");
+      console.log(error("An error occurred."));
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="pt-8 pb-0 md:pt-5 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,_#183EC2,_#EAEEFE)]">
+    <section className="pt-8 pb-0 md:pt-5 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,_#183EC2,_#EAEEFE_60%)]">
       <div className="container px-4">
         <div className="md:flex items-center">
           <div className="md:w-[478px]">
@@ -79,16 +87,21 @@ export default function Banner() {
                 <DialogTrigger asChild>
                   <Button className="btn btn-primary">Get for Free</Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="max-w-4xl">
                   <DialogTitle className="">Complaint Form</DialogTitle>
-                  <div className="relative z-10 w-full">
-                    <ComplaintForm
-                      type="Create"
-                      complaint={complaint}
-                      setComplaint={setComplaint}
-                      submitting={submitting}
-                      handleSubmit={createComplaint}
-                    />
+                  <div className="flex flex-col md:flex-row">
+                    <div className="md:w-1/2 hidden md:flex items-center justify-center">
+                      <Lottie animationData={animationData} />
+                    </div>
+                    <div className="md:w-1/2">
+                      <ComplaintForm
+                        type="Create"
+                        complaint={complaint}
+                        setComplaint={setComplaint}
+                        submitting={submitting}
+                        handleSubmit={createComplaint}
+                      />
+                    </div>
                   </div>
                 </DialogContent>
               </Dialog>
@@ -107,79 +120,75 @@ export default function Banner() {
                 className="inset-0 flex items-center justify-end"
               >
                 <div className="relative mt-20 md:mt-0 md:h-[648px] md:flex-1">
-            
-                <Image
-                  src="/assets/cog.png"
-                  alt="cog"               
-                  height={220}
-                  width={220}
-                  objectFit="contain"
-                  className="md:absolute md:h-full md:w-auto md:max-w-none md:left-6"
-                />
-                <Image
-                  src="/assets/cylinder.png"
-                  alt="cylinder"
-                  layout="fixed"
-                  height={220}
-                  width={220}
-                  className="hidden md:block absolute top-[-6%] left-28 md:absolute"
-                />
-                <Image
-                  src="/assets/noodle.png"
-                  alt="noodle"
-                  layout="fixed"
-                  height={220}
-                  width={220}
-                  className="hidden md:block absolute top-[524px] left-[448px] rotate-[30deg]"
-                />
-            
-            </div>
+                  <Image
+                    src="/assets/cog.png"
+                    alt="cog"               
+                    height={220}
+                    width={220}
+                    objectFit="contain"
+                    className="md:absolute md:h-full md:w-auto md:max-w-none md:left-6"
+                  />
+                  <Image
+                    src="/assets/cylinder.png"
+                    alt="cylinder"
+                    layout="fixed"
+                    height={220}
+                    width={220}
+                    className="hidden md:block absolute top-[-6%] left-28 md:absolute"
+                  />
+                  <Image
+                    src="/assets/noodle.png"
+                    alt="noodle"
+                    layout="fixed"
+                    height={220}
+                    width={220}
+                    className="hidden md:block absolute top-[524px] left-[448px] rotate-[30deg]"
+                  />
+                </div>
               </motion.div>
             </div>
           </div>
         </div>
       </div>
       <div>
-      
-    <div className="py-8 md:py-16 bg-white overflow-hidden">
-      <div className="container">
-        <div className="relative flex justify-center overflow-hidden [mask-image:linear-gradient(to_right, transparent, black, transparent)]">
-          <div className="flex animate-marquee gap-14 flex-none">
-            <Image
-              src="/assets/logo-acme.png"
-              width={40}
-              height={40}
-              alt="brand image"
-              className="h-6 px-2 w-auto"
-            />
-            <Image
-              src="/assets/logo-apex.png"
-              width={40}
-              height={40}
-              alt="brand image"
-              className="h-6 px-2 w-auto"
-            />
-            <Image
-              src="/assets/logo-pulse.png"
-              width={40}
-              height={40}
-              alt="brand image"
-              className="h-6 px-2 w-auto"
-            />
-            <Image
-              src="/assets/logo-quantum.png"
-              width={40}
-              height={40}
-              alt="brand image"
-              className="h-6 px-2 w-auto"
-            />
-            {/* Repeat images as needed */}
+        <div className="py-8 md:py-16 bg-white overflow-hidden">
+          <div className="container">
+            <div className="relative flex justify-center overflow-hidden [mask-image:linear-gradient(to_right, transparent, black, transparent)]">
+              <div className="flex animate-marquee gap-14 flex-none">
+                <Image
+                  src="/assets/logo-acme.png"
+                  width={40}
+                  height={40}
+                  alt="brand image"
+                  className="h-6 px-2 w-auto"
+                />
+                <Image
+                  src="/assets/logo-apex.png"
+                  width={40}
+                  height={40}
+                  alt="brand image"
+                  className="h-6 px-2 w-auto"
+                />
+                <Image
+                  src="/assets/logo-pulse.png"
+                  width={40}
+                  height={40}
+                  alt="brand image"
+                  className="h-6 px-2 w-auto"
+                />
+                <Image
+                  src="/assets/logo-quantum.png"
+                  width={40}
+                  height={40}
+                  alt="brand image"
+                  className="h-6 px-2 w-auto"
+                />
+                {/* Repeat images as needed */}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
- 
-    </div>
     </section>
   );
 }

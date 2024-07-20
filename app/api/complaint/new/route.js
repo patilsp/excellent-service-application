@@ -2,11 +2,11 @@ import Complaint from "@/models/complaint";
 import { connectToDB } from "@/utils/database";
 
 export const POST = async (request) => {
-    const { name, mobile, city, note } = await request.json();
+    const { name, mobile, city, note, complaintType, model} = await request.json();
 
     try {
         await connectToDB();
-        const newComplaint = new Complaint({ name, mobile, city, note });
+        const newComplaint = new Complaint({ name, mobile, city, note, complaintType, model });
         await newComplaint.save();
 
         // Return a simplified response or just the ID of the created complaint

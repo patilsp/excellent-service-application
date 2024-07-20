@@ -1,9 +1,5 @@
-"use client";
-
 import React from 'react';
-import Link from 'next/link';
-
-import { Button } from "@/registry/new-york/ui/button"
+import { Button } from "@/registry/new-york/ui/button";
 import {
   Card,
   CardContent,
@@ -11,26 +7,29 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/registry/new-york/ui/card"
-import { Input } from "@/registry/new-york/ui/input"
-import { Label } from "@/registry/new-york/ui/label"
+} from "@/registry/new-york/ui/card";
+import { Input } from "@/registry/new-york/ui/input";
+import { Label } from "@/registry/new-york/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/registry/new-york/ui/select"
-import { Textarea } from "@/registry/new-york/ui/textarea"
-import { useRouter } from "next/navigation"
-import toast from "react-hot-toast"
+} from "@/registry/new-york/ui/select";
+import { Textarea } from "@/registry/new-york/ui/textarea";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit }) => {
   const router = useRouter();
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      handleSubmit(); // Invoke the handleSubmit function passed as a prop
+
       const response = await fetch("/api/complaint/new", {
         method: "POST",
         headers: {
@@ -40,23 +39,23 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
           name: complaint.name,
           mobile: complaint.mobile,
           note: complaint.note,
+          complaintType: complaint.complaintType,
+          model: complaint.model,
         }),
       });
 
       if (response.ok) {
         toast.success("Complaint has been registered successfully! 🔥");
-        router.push("/");        
+        router.push("/");
         setComplaint({
           name: "",
           mobile: "",
-          type :"",
+          complaintType: "",
           note: "",
-         
+          model: "",
         });
-
       } else {
         toast.error("Failed to register complaint.");
-      
       }
     } catch (error) {
       console.error("An error occurred while submitting complaint:", error);
@@ -68,32 +67,32 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
       <h1 className='head_text py-2 text-center text-sm'>
         Sign Up and get 7 Days Free Trial
       </h1>
-        
+
       <form
         onSubmit={handleFormSubmit} // Use handleFormSubmit to handle form submission
-        className='glassmorphism mt-5 flex w-full max-w-2xl flex-col gap-5 rounded-lg border border-gray-200 p-4'
+        className='glassmorphism mt-5 flex w-full max-w-2xl flex-col gap-4 rounded-lg border border-gray-200 p-4'
       >
         <div className="grid gap-2">
-          <Label htmlFor="type">Complaint Type</Label>
+          <Label htmlFor="type">Service Type</Label>
           <Select
-            value={complaint.type}
-            onChange={(e) => setComplaint({ ...complaint, type: e.target.value })}
+            value={complaint.complaintType}
+            onValueChange={(value) => setComplaint({ ...complaint, complaintType: value })}
             className='input'
+            placeholder="Select Service Type"
             required
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select Complaint Type" ></SelectValue>
+              <SelectValue placeholder="Select Complaint Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="product">Product Issue</SelectItem>
-              <SelectItem value="service">Service Issue</SelectItem>
-              <SelectItem value="billing">Billing Issue</SelectItem>
+              <SelectItem value="Installation">Installation</SelectItem>
+              <SelectItem value="Service">Service Issue</SelectItem>
+              <SelectItem value="Repair">Repair</SelectItem>
+              <SelectItem value="Maintenance">Maintenance</SelectItem>
             </SelectContent>
           </Select>
-          
         </div>
 
-       
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
           <Input
@@ -105,7 +104,6 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
           />
         </div>
 
-       
         <div className="grid gap-2">
           <Label htmlFor="phone">Phone Number</Label>
           <Input
@@ -116,6 +114,18 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
             className='input'
           />
         </div>
+
+        <div className="grid gap-2">
+          <Label htmlFor="Model">Model Number</Label>
+          <Input
+            value={complaint.model}
+            onChange={(e) => setComplaint({ ...complaint, model: e.target.value })}
+            placeholder='Enter Model Number'
+            required
+            className='input'
+          />
+        </div>
+
         <div className="grid gap-2">
           <Label htmlFor="note">Description</Label>
           <Textarea
@@ -127,15 +137,13 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
           />
         </div>
 
-
         <div className='mx-3 flex justify-center gap-4 py-1'>
-       
           <Button
             type='submit'
             disabled={submitting}
             className='rounded bg-primary px-5 py-1.5 text-sm text-white'
           >
-            Request A  Call Back{submitting}
+            {submitting ? 'Submitting...' : 'Request A Call Back'}
           </Button>
         </div>
       </form>

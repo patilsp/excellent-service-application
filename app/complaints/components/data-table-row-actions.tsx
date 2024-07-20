@@ -25,12 +25,14 @@ interface DataTableRowActionsProps {
   row: Row<Complaint>;
   onEdit: (complaintId: string) => void;
   onDelete: (complaintId: string) => void;
+  onRefresh: () => void; // Add this prop
 }
 
 export function DataTableRowActions({
   row,
   onEdit,
   onDelete,
+  onRefresh,
 }: DataTableRowActionsProps) {
   const router = useRouter();
   const complaint = complaintsSchema.parse(row.original);
@@ -54,7 +56,9 @@ export function DataTableRowActions({
           throw new Error("Failed to delete complaint");
         } else {
           toast.error("Complaint has been deleted!");
-          router.push("/complaints");
+          if (onRefresh) {
+            onRefresh(); 
+          }
         }
         if (onDelete) {
           onDelete(complaint.id);
@@ -94,7 +98,7 @@ export function DataTableRowActions({
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={handleDelete}>
+        <DropdownMenuItem onSelect={handleDelete} >
           Delete
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>

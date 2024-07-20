@@ -70,9 +70,9 @@ export function CommandMenu({ ...props }: DialogProps) {
 
           <div className="card ">
             <div className="results">
-              <p className="label mt-2">Available Options</p>
+              <p className="label mt-4">Available Options</p>
 
-              <CommandGroup className=" py-4">
+              <CommandGroup className="py-3">
                 {docsConfig.mainNav
                   .filter((navitem) => !navitem.external)
                   .map((navItem) => (

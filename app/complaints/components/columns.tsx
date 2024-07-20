@@ -31,7 +31,11 @@ export const columns: ColumnDef<Complaint>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Complaint ID" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => {
+      const id = row.getValue("id");
+      const formattedId = Number.isInteger(id) ? `complaint-${id}` : `complaint-${parseInt(id, 12)}`;
+      return <div className="w-[80px]">{formattedId}</div>;
+    },
     enableSorting: true,
     enableHiding: false,
   },
@@ -54,6 +58,15 @@ export const columns: ColumnDef<Complaint>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "model",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Model" />
+    ),
+    cell: ({ row }) => <div className="">{row.getValue("model")}</div>,
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
     accessorKey: "note",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Complaint Note" />
@@ -61,6 +74,15 @@ export const columns: ColumnDef<Complaint>[] = [
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("note")}</div>,
     enableSorting: true,
     enableHiding: false,
+  },
+  {
+    accessorKey: "complaintType",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Complaint Type" />
+    ),
+    cell: ({ row }) => <div className="">{row.getValue("complaintType")}</div>,
+    enableSorting: true,
+    enableHiding: true,
   },
   {
     id: "actions",

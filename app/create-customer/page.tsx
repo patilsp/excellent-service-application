@@ -46,6 +46,8 @@ const CreateCustomer = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // console.log('Post data:', post);
+
     try {
       const response = await fetch("/api/customer/new", {
         method: "POST",

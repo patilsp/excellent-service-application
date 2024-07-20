@@ -7,6 +7,7 @@ export const customersSchema = z.object({
   status: z.string(),
   phone: z.string(),
   address: z.string(),
+  dateofbirth: z.string(),
 })
 
 export type Customer = z.infer<typeof customersSchema>

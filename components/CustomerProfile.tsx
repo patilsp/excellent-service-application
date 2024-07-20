@@ -8,7 +8,7 @@ const CustomerProfile = ({ name, desc, data, handleEdit, handleDelete }) => {
       </h1>
       <p className='desc text-left'>{desc}</p>
 
-      <div className='mt-10 prompt_layout'>
+      <div className='mt-10 space-y-6 py-8 sm:columns-2 sm:gap-6 xl:columns-3'>
         {data.map((customer) => (
           <CustomerCard
             key={customer._id}

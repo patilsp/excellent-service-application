@@ -24,7 +24,7 @@ export function MobileNav() {
 
   const userName = user?.fullName || "User Name";
   const userProfileImage = user?.profileImageUrl || "/images/avatar.png";
-  const userEmail = user?.email || "";
+  const userMobile = user?.phone || "";
 
   return (
     <Sheet classNme="bg-gray-200" open={open} onOpenChange={setOpen}>
@@ -51,9 +51,9 @@ export function MobileNav() {
             alt="user profile image"
            
           />
-          <div className="grid gap-2">
+          <div className="grid gap-1">
             <span className="text_primary ml-3 text-2xl font-bold">{userName}</span>
-            <span className="ml-3 text-sm font-bold text-gray-600">{userName}</span>
+            <span className="ml-3 text-sm font-bold text-gray-600">{userMobile}</span>
           </div>
         </MobileLink>
         <ScrollArea className="my-4 h-[calc(100vh-12rem)] flex-1 pb-10 pl-6">

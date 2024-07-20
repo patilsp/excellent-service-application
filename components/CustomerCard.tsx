@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
+import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/registry/new-york/ui/card";
+import { Button } from "@/registry/new-york/ui/button";
 
 const CustomerCard = ({ customer, handleEdit, handleDelete }) => {
   const { user } = useUser();
@@ -13,11 +15,9 @@ const CustomerCard = ({ customer, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
 
   const handleProfileClick = () => {
-    console.log(customer);
+    if (customer.customerId === user.id) return router.push("/profile");
 
-    if (customer.userId === user.id) return router.push("/profile");
-
-    router.push(`/profile/${customer.userId}`);
+    router.push(`/CustomerProfile/${customer.customerId}`);
   };
 
   const handleCopy = () => {
@@ -27,66 +27,53 @@ const CustomerCard = ({ customer, handleEdit, handleDelete }) => {
   };
 
   return (
-    <div className='prompt_card'>
-      <div className='flex justify-between items-start gap-5'>
+    <Card className='mx-auto w-full max-w-sm rounded border shadow'>
+      <CardContent className='pt-4'>
         <div
-          className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
+          className='flex cursor-pointer flex-col items-center'
           onClick={handleProfileClick}
         >
-          {user && user.profileImageUrl && (
+          <div className='mb-4 flex '>
             <Image
-              src={user.profileImageUrl}
-              alt='user_image'
-              width={40}
-              height={40}
+              src="/avatars/01.png"
+              alt="Customer Avatar"
+              width={50}
+              height={50}
+              className="rounded-full"
             />
-          )}
-
-          <div className='flex flex-col'>
-            <h3 className='font-satoshi font-semibold text-gray-900'>
-              {customer.name}
-            </h3>
-            <p className='font-inter text-sm text-gray-500'>
-              {customer.email}
-            </p>
+            <div className='ml-4'>
+              <CardTitle className='text-lg font-semibold text-gray-900'>
+                {customer.name}
+              </CardTitle>
+              <CardDescription className='text-sm text-gray-500'>
+                {customer.email}
+              </CardDescription>
+            </div>
           </div>
+          <p className='text-sm text-gray-700'>{customer.phone}</p>
+          <p className='text-sm text-gray-700'>{customer.address}</p>
+          <p className='mt-5 rounded bg-slate-700 p-2 text-sm text-white'>{customer.status}</p>
         </div>
-
-        <div className='copy_btn' onClick={handleCopy}>
-          <Image
-            src={
-              copied === customer.email
-                ? "/assets/icons/tick.svg"
-                : "/assets/icons/copy.svg"
-            }
-            alt={copied === customer.email ? "tick_icon" : "copy_icon"}
-            width={12}
-            height={12}
-          />
-        </div>
-      </div>
-
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{customer.phone}</p>
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{customer.address}</p>
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{customer.status}</p>
-
-      {user.id === customer.userId && pathName === "/profile" && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
-          <p
-            className='font-inter text-sm green_gradient cursor-pointer'
+      </CardContent>
+      
+        {/* <CardFooter className='flex justify-center gap-2 border-t border-gray-200 p-4'>
+          <Button
+            variant="outline"
             onClick={handleEdit}
+            className='text-green-600'
           >
             Edit
-          </p>
-          <p
-            className='font-inter text-sm orange_gradient cursor-pointer'
+          </Button>
+          <Button
+            variant="outline"
             onClick={handleDelete}
+            className='text-red-600'
           >
             Delete
-          </p>
-        </div>
-      )}
-    </div>
+          </Button>
+        </CardFooter> */}
+     
+    </Card>
   );
 };
 

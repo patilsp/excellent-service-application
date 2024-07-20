@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CustomerForm from "@/components/CustomerForm";
+import toast from 'react-hot-toast';
 
 const UpdateCustomer = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const customerId = searchParams.get("id"); 
 
-  const [customer, setCustomer] = useState({
+  const [customer, setPosts] = useState({
     name: "",
     email: "",
     phone: "",
@@ -17,24 +18,27 @@ const UpdateCustomer = () => {
   });
   const [submitting, setIsSubmitting] = useState(false);
 
+  // console.log(customerId);
+
   useEffect(() => {
     const getCustomerDetails = async () => {
-      const response = await fetch(`/api/Customer/${customerId}`);
-      const data = await response.json();
-
-      setPost({
-        id: data.id,
-        name: data.name,
-        email:data.email,
-        phone:data.phone,
-        address:data.address,
-      });
+      try {
+        const response = await fetch(`/api/customer`); 
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error("Failed to fetch customers:", error);
+      }
     };
 
     if (customerId) getCustomerDetails();
   }, [customerId]);
 
   
+// console.log(customerId);
 
   const updateCustomer = async (e) => {
     e.preventDefault();
@@ -47,7 +51,7 @@ const UpdateCustomer = () => {
     }
 
     try {
-      const response = await fetch(`/api/customer/${customerId}`, { // Use customerId here
+      const response = await fetch(`/api/customer/${customerId}`, { 
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -57,16 +61,20 @@ const UpdateCustomer = () => {
           email: customer.email,
           phone: customer.phone,
           address: customer.address,
+          dateofbirth: customer.dateofbirth,
         }),
       });
 
       if (response.ok) {
-        router.push("/"); // Adjust the path as necessary
+        toast.success("Customer has been updated! 🔥");
+        router.push("/customers"); 
       } else {
         throw new Error("Failed to update customer");
       }
     } catch (error) {
-      console.error("Error updating customer:", error);
+      // console.error("Error updating customer:", error);
+      toast.error("Failed to update customer!", error);
+
     } finally {
       setIsSubmitting(false);
     }
@@ -76,7 +84,7 @@ const UpdateCustomer = () => {
     <CustomerForm
       type="Edit"
       post={customer}
-      setPost={setCustomer}
+      setPost={setPosts}
       submitting={submitting}
       handleSubmit={updateCustomer}
     />

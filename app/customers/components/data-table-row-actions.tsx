@@ -19,12 +19,14 @@ import {
 } from "@/registry/new-york/ui/dropdown-menu";
 import { names } from "../data/data";
 import { customersSchema } from "../data/schema";
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
+
+
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
-  onEdit: (customerId: string) => void; // Change to use customerId
-  onDelete: (customerId: string) => void; // Change to use customerId
+  onEdit: (customerId: string) => void;
+  onDelete: (customerId: string) => void;
 }
 
 export function DataTableRowActions<TData>({
@@ -52,14 +54,16 @@ export function DataTableRowActions<TData>({
         });
         if (!response.ok) {
           throw new Error("Failed to delete customer ");
+        }else{
+          toast.error("Customer has been deleted!");
+          router.push("/customers"); 
         }
-      toast.error("Customer deleted successfully!");
-      router.push("/");
         if (onDelete) {
           onDelete(customer.id);
         }
       } catch (error) {
-        console.error("Error deleting customer:", error);
+        // console.error("Error deleting customer:", error);
+        toast.error("Error deleting customer:", error);
       }
     }
   };

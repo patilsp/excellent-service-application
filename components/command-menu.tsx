@@ -24,6 +24,8 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/registry/new-york/ui/command"
+import { Search } from 'lucide-react'
+
 
 export function CommandMenu({ ...props }: DialogProps) {
   const router = useRouter()
@@ -52,16 +54,13 @@ export function CommandMenu({ ...props }: DialogProps) {
       <Button
         variant="outline"
         className={cn(
-          "relative w-full h-9 mr-2 justify-start text-xs text-muted-foreground sm:pr-12 md:w-28 lg:w-64"
+          "relative mr-2 h-7 px-1"
         )}
         onClick={() => setOpen(true)}
         {...props}
       >
-        <span className="hidden lg:inline-flex">Search...</span>
-        <span className="inline-flex lg:hidden">Search...</span>
-        <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 mr-1 font-mono text-[10px] font-medium opacity-100 sm:flex">
-          <span className="text-xs">⌘</span>K
-        </kbd>
+      
+      <Search size={24} color="black" className="p-1"/>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />

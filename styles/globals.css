@@ -72,6 +72,15 @@
     @apply bg-background text-foreground text-xs;
   }
 }
+@layer components {
+
+  h1 {
+    @apply text-2xl font-extrabold uppercase bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent ml-1 mt-2 mb-1 transition-all duration-200;
+  }
+  
+}
+
+
 .text-primary{
   color: #f7f7f7;
 }
@@ -108,9 +117,9 @@
   font-size: 13px;
 }
 
-.cl-internal-1fsg6zy{
+/* .cl-internal-1fsg6zy{
   background-color: rgb(107, 62, 148);
-}
+} */
 
 html {
   scroll-behavior: smooth;
@@ -173,7 +182,6 @@ html {
 .logo-tricker-image{
   @apply h-8 w-auto;
 }
-
 
 
 .search-container {

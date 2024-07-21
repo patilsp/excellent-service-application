@@ -63,10 +63,10 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
 
   return (
     <section className='mb-5 flex w-full max-w-full flex-col items-center justify-center px-4'>
-      <div className="grid items-center justify-center gap-2 p-2">
-        <h1 className='head_text text-center text-sm'>
+      <div className="grid items-center justify-center gap-2">
+        {/* <h1 className='head_text text-center text-sm'>
           Sign Up and get 7 Days Free Trial
-        </h1>
+        </h1> */}
         {/* <h1 className="py-1 text-center">  
           <span>Pay only for Perfectly Purified Water with Excellent Service</span>
           <span>Trusted by 1 Lakh+ happy customers </span>
@@ -85,6 +85,7 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
             onValueChange={(value) => setComplaint({ ...complaint, complaintType: value })}
             className='input'
             required
+            default='Send Inquiry'
           >
             <SelectTrigger>
               <SelectValue placeholder="Select Service Type" />
@@ -94,6 +95,7 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
               <SelectItem value="Service">Service Issue</SelectItem>
               <SelectItem value="Repair">Repair</SelectItem>
               <SelectItem value="Maintenance">Maintenance</SelectItem>
+              <SelectItem value="Inquiry">Send Inquiry</SelectItem>
             </SelectContent>
           </Select>
         </div>

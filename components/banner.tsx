@@ -87,16 +87,18 @@ export default function Banner() {
               <DialogTrigger asChild>
                 <Button className="btn btn-primary">Get for Free</Button>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl">
-                <DialogTitle className="text-slate-700">Register Here To Get A Call</DialogTitle>
+              <DialogContent className="max-w-5xl">
+                <DialogTitle className="text-slate-700">Get the list of best <span className="text-xl text-indigo-500">Water Purifier Repair & Services </span></DialogTitle>
+
                 <div className="flex flex-col md:flex-row">
                   <div className="hidden items-center justify-center md:flex md:w-1/2">
+                  
                     <Image
                       src={bannerImage}
                       alt="Banner"
                       layout="responsive" 
-                      width={500} 
-                      height={500}
+                      width={460} 
+                      height={460}
                       className="rounded-md object-cover"
                     />
                   </div>
@@ -127,16 +129,16 @@ export default function Banner() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="inset-0 flex items-center justify-end"
               >
-                <div className="relative mt-20 md:mt-0 md:h-[648px] md:flex-1">
+                <div className="relative sm:mt-0 md:mt-7 md:h-[648px] md:flex-1">
                   <Image
-                    src="/assets/cog.png"
+                    src="/images/developer-team.svg"
                     alt="cog"               
                     height={220}
                     width={220}
                     objectFit="contain"
                     className="md:absolute md:left-6 md:h-full md:w-auto md:max-w-none"
                   />
-                  <Image
+                  {/* <Image
                     src="/assets/cylinder.png"
                     alt="cylinder"
                     layout="fixed"
@@ -151,7 +153,7 @@ export default function Banner() {
                     height={220}
                     width={220}
                     className="absolute left-[448px] top-[524px] hidden rotate-[30deg] md:block"
-                  />
+                  /> */}
                 </div>
               </motion.div>
             </div>

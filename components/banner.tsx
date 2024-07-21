@@ -18,8 +18,8 @@ import {
   DialogTrigger,
 } from "@/registry/new-york/ui/dialog";
 
-import Lottie from "lottie-react";
-import animationData from "/assets/call-center.json";
+import bannerImage from '../public/images/banner.webp';
+
 
 export default function Banner() {
   const [submitting, setIsSubmitting] = useState(false);
@@ -53,7 +53,7 @@ export default function Banner() {
           model:"",
           complaintType:"",
         });
-        setTimeout(() => setOpen(false), 2000); // Close modal after 2 seconds
+        setTimeout(() => setOpen(false), 2000);
       } else {
         console.log(error("Failed to register complaint."));
       }
@@ -83,29 +83,37 @@ export default function Banner() {
               Experience pure and fresh water with our advanced purification services. Reliable solutions for your home and office.
             </motion.p>
             <div className="mt-7 flex gap-2">
-              <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                  <Button className="btn btn-primary">Get for Free</Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl">
-                  <DialogTitle className="">Complaint Form</DialogTitle>
-                  <div className="flex flex-col md:flex-row">
-                    <div className="hidden items-center justify-center md:flex md:w-1/2">
-                      <Lottie animationData={animationData} />
-                    </div>
-                    <div className="md:w-1/2">
-                      <ComplaintForm
-                        type="Create"
-                        complaint={complaint}
-                        setComplaint={setComplaint}
-                        submitting={submitting}
-                        handleSubmit={createComplaint}
-                      />
-                    </div>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button className="btn btn-primary">Get for Free</Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl">
+                <DialogTitle className="text-slate-700">Register Here To Get A Call</DialogTitle>
+                <div className="flex flex-col md:flex-row">
+                  <div className="hidden items-center justify-center md:flex md:w-1/2">
+                    <Image
+                      src={bannerImage}
+                      alt="Banner"
+                      layout="responsive" 
+                      width={500} 
+                      height={500}
+                      className="rounded-md object-cover"
+                    />
                   </div>
-                </DialogContent>
-              </Dialog>
-              <Button className="btn btn-text bg-transparent text-black hover:text-white flex items-center gap-1">
+                  <div className="md:w-1/2">
+                    <ComplaintForm
+                      type="Create"
+                      complaint={complaint}
+                      setComplaint={setComplaint}
+                      submitting={submitting}
+                      handleSubmit={createComplaint}
+                    />
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+              <Button className="btn btn-text flex items-center gap-1 bg-transparent text-black hover:text-white">
                 <span>Know More</span>
                 <Image src="/assets/arrow-right.svg" alt="arrow image" width={20} height={20} className="h-5 w-5" />
               </Button>
@@ -126,7 +134,7 @@ export default function Banner() {
                     height={220}
                     width={220}
                     objectFit="contain"
-                    className="md:absolute md:h-full md:w-auto md:max-w-none md:left-6"
+                    className="md:absolute md:left-6 md:h-full md:w-auto md:max-w-none"
                   />
                   <Image
                     src="/assets/cylinder.png"
@@ -134,7 +142,7 @@ export default function Banner() {
                     layout="fixed"
                     height={220}
                     width={220}
-                    className="hidden md:block absolute top-[-6%] left-28 md:absolute"
+                    className="absolute left-28 top-[-6%] hidden md:absolute md:block"
                   />
                   <Image
                     src="/assets/noodle.png"
@@ -142,7 +150,7 @@ export default function Banner() {
                     layout="fixed"
                     height={220}
                     width={220}
-                    className="hidden md:block absolute top-[524px] left-[448px] rotate-[30deg]"
+                    className="absolute left-[448px] top-[524px] hidden rotate-[30deg] md:block"
                   />
                 </div>
               </motion.div>
@@ -151,37 +159,37 @@ export default function Banner() {
         </div>
       </div>
       <div>
-        <div className="py-8 md:py-16 bg-white overflow-hidden">
+        <div className="overflow-hidden bg-white py-8 md:py-16">
           <div className="container">
-            <div className="relative flex justify-center overflow-hidden [mask-image:linear-gradient(to_right, transparent, black, transparent)]">
-              <div className="flex animate-marquee gap-14 flex-none">
+            <div className="[mask-image:linear-gradient(to_right, transparent, black, transparent)] relative flex justify-center overflow-hidden">
+              <div className="animate-marquee flex flex-none gap-14">
                 <Image
                   src="/assets/logo-acme.png"
                   width={40}
                   height={40}
                   alt="brand image"
-                  className="h-6 px-2 w-auto"
+                  className="h-6 w-auto px-2"
                 />
                 <Image
                   src="/assets/logo-apex.png"
                   width={40}
                   height={40}
                   alt="brand image"
-                  className="h-6 px-2 w-auto"
+                  className="h-6 w-auto px-2"
                 />
                 <Image
                   src="/assets/logo-pulse.png"
                   width={40}
                   height={40}
                   alt="brand image"
-                  className="h-6 px-2 w-auto"
+                  className="h-6 w-auto px-2"
                 />
                 <Image
                   src="/assets/logo-quantum.png"
                   width={40}
                   height={40}
                   alt="brand image"
-                  className="h-6 px-2 w-auto"
+                  className="h-6 w-auto px-2"
                 />
                 {/* Repeat images as needed */}
               </div>

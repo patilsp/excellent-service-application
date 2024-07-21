@@ -17,6 +17,10 @@ export const docsConfig: DocsConfig = {
       href: "/dashboard",
     },
     {
+      title: "Users",
+      href: "/users",
+    },
+    {
       title: "Customers",
       href: "/customers",
     },
@@ -25,9 +29,10 @@ export const docsConfig: DocsConfig = {
       href: "/products",
     },
     {
-      title: "Tasks",
-      href: "/tasks",
+      title: "Complaints",
+      href: "/complaints",
     },
+   
     
   ],
   sidebarNav: [

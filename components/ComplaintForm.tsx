@@ -63,13 +63,20 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
 
   return (
     <section className='mb-5 flex w-full max-w-full flex-col items-center justify-center px-4'>
-      <h1 className='head_text py-2 text-center text-sm'>
-        Sign Up and get 7 Days Free Trial
-      </h1>
+      <div className="grid items-center justify-center gap-2 p-2">
+        <h1 className='head_text text-center text-sm'>
+          Sign Up and get 7 Days Free Trial
+        </h1>
+        {/* <h1 className="py-1 text-center">  
+          <span>Pay only for Perfectly Purified Water with Excellent Service</span>
+          <span>Trusted by 1 Lakh+ happy customers </span>
+        </h1> */}
 
+        
+      </div>
       <form
-        onSubmit={handleFormSubmit} // Use handleFormSubmit to handle form submission
-        className='glassmorphism mt-5 flex w-full max-w-2xl flex-col gap-4 rounded-lg border border-gray-200 p-4'
+        onSubmit={handleFormSubmit}
+        className='glassmorphism mt-4 flex w-full max-w-2xl flex-col gap-4 rounded-lg border border-gray-200 p-4'
       >
         <div className="grid gap-2">
           <Label htmlFor="type">Service Type</Label>

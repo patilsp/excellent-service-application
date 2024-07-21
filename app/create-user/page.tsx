@@ -43,13 +43,11 @@ const CreateUser = () => {
 
       if (response.ok) {
         toast.success("User has been created! 🔥");
-        router.push("/users");
+        router.push("/dashboard");
       } else {
-        // console.error('Error Response Data:', responseData);
         toast.error(responseData.message || "Failed to create user");
       }
     } catch (error) {
-    //   console.error('Fetch Error:', error); 
       toast.error(error.message || "An error occurred");
     } finally {
       setIsSubmitting(false);

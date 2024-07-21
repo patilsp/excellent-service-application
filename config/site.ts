@@ -22,8 +22,8 @@ export const siteConfig = {
       href: "/products",
     },
     {
-      title: "Tasks",
-      href: "/tasks",
+      title: "Users",
+      href: "/users",
     },
      {
       title: "Settings",

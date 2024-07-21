@@ -1,34 +1,32 @@
-import React from 'react';
-import { Button } from "@/registry/new-york/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/registry/new-york/ui/card";
-import { Input } from "@/registry/new-york/ui/input";
-import { Label } from "@/registry/new-york/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/new-york/ui/select";
-import { Textarea } from "@/registry/new-york/ui/textarea";
+"use client";
+
+import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useAuth, useUser } from '@clerk/nextjs';
+import { Button } from "@/registry/new-york/ui/button";
+import { Input } from "@/registry/new-york/ui/input";
+import { Label } from "@/registry/new-york/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/new-york/ui/select";
+import { Textarea } from "@/registry/new-york/ui/textarea";
 
 const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit }) => {
   const router = useRouter();
+  const { isLoaded, userId } = useAuth();
+  const { isSignedIn } = useUser();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isLoaded || !isSignedIn) {
+      // Redirect to sign-in page if not signed in
+      router.push("/sign-in");
+      return;
+    }
+
     try {
-      handleSubmit(); // Invoke the handleSubmit function passed as a prop
+      // Invoke the handleSubmit function passed as a prop
+      handleSubmit(); 
 
       const response = await fetch("/api/complaint/new", {
         method: "POST",
@@ -59,6 +57,7 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
       }
     } catch (error) {
       console.error("An error occurred while submitting complaint:", error);
+      toast.error("An error occurred while submitting the complaint.");
     }
   };
 
@@ -78,11 +77,10 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
             value={complaint.complaintType}
             onValueChange={(value) => setComplaint({ ...complaint, complaintType: value })}
             className='input'
-            placeholder="Select Service Type"
             required
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select Complaint Type" />
+              <SelectValue placeholder="Select Service Type" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Installation">Installation</SelectItem>

@@ -5,9 +5,9 @@ import { connectToDB } from '@/utils/database';
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { id, username, email, bio } = body;
+    const { id, role } = body;
 
-    if (!id || !username || !email) {
+    if (!id || !role) {
       return NextResponse.json({ message: 'ID, Username, and Email are required' }, { status: 400 });
     }
 
@@ -19,9 +19,7 @@ export async function POST(request) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    user.username = username;
-    user.email = email;
-    user.bio = bio;
+    user.role = role;
 
     await user.save();
 

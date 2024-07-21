@@ -65,24 +65,24 @@ export default function Banner() {
   };
 
   return (
-    <section className="pt-8 pb-0 md:pt-5 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,_#183EC2,_#EAEEFE_60%)]">
+    <section className="bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,_#183EC2,_#EAEEFE_60%)] pb-0 pt-8 md:pt-5">
       <div className="container px-4">
-        <div className="md:flex items-center">
+        <div className="items-center md:flex">
           <div className="md:w-[478px]">
-            <div className="text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded tracking-tighter">
+            <div className="inline-flex rounded border border-[#222]/10 px-3 py-1 text-sm tracking-tighter">
               - Your Trusted Water Purification Partner
             </div>
-            <h1 className="text-5xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6">
+            <h1 className="mt-6 bg-gradient-to-b from-black to-[#001E80] bg-clip-text text-5xl font-bold tracking-tighter text-transparent">
               Clean and Safe <span className="text-primary1">Water</span> <br className="hidden sm:inline" />
               <span className="text-primary1">Purification</span> Solutions
             </h1>
             <motion.p
               variants={slideInFromLeft(0.8)}
-              className="max-w-[42rem] leading-normal mt-4 text-gray-50 text-sm sm:text-xl sm:leading-8"
+              className="mt-4 max-w-[42rem] text-sm leading-normal text-gray-50 sm:text-xl sm:leading-8"
             >
               Experience pure and fresh water with our advanced purification services. Reliable solutions for your home and office.
             </motion.p>
-            <div className="flex gap-2 mt-7">
+            <div className="mt-7 flex gap-2">
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                   <Button className="btn btn-primary">Get for Free</Button>
@@ -90,7 +90,7 @@ export default function Banner() {
                 <DialogContent className="max-w-4xl">
                   <DialogTitle className="">Complaint Form</DialogTitle>
                   <div className="flex flex-col md:flex-row">
-                    <div className="md:w-1/2 hidden md:flex items-center justify-center">
+                    <div className="hidden items-center justify-center md:flex md:w-1/2">
                       <Lottie animationData={animationData} />
                     </div>
                     <div className="md:w-1/2">

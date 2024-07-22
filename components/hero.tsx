@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const cardVariants = {
   hover: {
-    scale: 1.05,
+    scale: 1.10,
   },
 };
 
@@ -73,11 +73,11 @@ export default function Hero() {
               <div className="rounded-md bg-white p-4 shadow-md transition duration-300">
                
                 <Image
-                  src="/assets/image1.png"
+                  src="/images/banner.jpg"
                   width={600}
-                  height={400}
+                  height={350}
                   alt="Regular Maintenance"
-                  className="mb-4 w-full rounded-lg"
+                  className="mb-4 rounded-lg"
                 />
                  <div className="flex w-full items-center gap-2">
                     <h3 className="mb-4 text-xl font-bold text-purple-600">Regular Maintenance</h3>

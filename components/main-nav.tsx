@@ -131,7 +131,7 @@ const ListItem = React.forwardRef<
         <motion.a
           ref={ref}
           className={cn(
-            "hover:text-bold block select-none space-y-1 rounded-md p-2 leading-none text-[#050505] no-underline outline-none transition-colors duration-300 ease-in-out hover:bg-gray-200 focus:bg-gray-300 focus:text-white",
+            "hover:text-bold block select-none rounded-md p-1 leading-none text-[#050505] no-underline outline-none transition-colors duration-300 ease-in-out hover:bg-[gray-200] focus:bg-gray-300 focus:text-white",
             className
           )}
           whileHover={{ scale: 1.05 }}

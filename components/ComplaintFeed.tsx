@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ComplaintCard from "@/components/ComplaintCard"; 
-import { motion } from "framer-motion";
+import ComplaintCard from "@/components/ComplaintCard";
 import { Input } from "@/registry/new-york/ui/input";
 
 const ComplaintCardList = ({ data, handleTagClick }) => {
@@ -29,7 +28,7 @@ const ComplaintFeed = () => {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch("/api/complaint"); // Adjust API endpoint as needed
+      const response = await fetch("/api/complaint");
       if (!response.ok) {
         throw new Error("Failed to fetch complaints");
       }
@@ -45,14 +44,13 @@ const ComplaintFeed = () => {
   }, []);
 
   const filterComplaints = (searchText) => {
-    const regex = new RegExp(searchText, "i"); // 'i' flag for case-insensitive search
-    return allComplaints.filter(
+    const regex = new RegExp(searchText, "i");
+    const results = allComplaints.filter(
       (item) =>
-        regex.test(item.complaintText) || // Adjust field names as per your data
-        regex.test(item.complaintId) || 
-        regex.test(item.customerName) ||
-        regex.test(item.status) // Example fields
+        regex.test(item.name) ||
+        regex.test(item.status) 
     );
+    return results;
   };
 
   const handleSearchChange = (e) => {
@@ -68,42 +66,45 @@ const ComplaintFeed = () => {
     );
   };
 
-  const handleTagClick = (tagName) => {
-    setSearchText(tagName);
+  const handleTagClick = (name) => {
+    setSearchText(name);
 
-    const searchResult = filterComplaints(tagName);
+    const searchResult = filterComplaints(name);
     setSearchedResults(searchResult);
   };
 
   return (
     <section className="w-full px-6 py-4">
+      <div className="space-between items-center md:flex ">
+        <div>
+          <h1 className="mb-6"> My Complaints </h1>
+        </div>
+        <div className="ml-auto">
+          <form className="mb-6">
+            <Input
+              type="text"
+              placeholder="Search for a complaint..."
+              value={searchText}
+              onChange={handleSearchChange}
+              className="w-full rounded border-gray-300 shadow-md"
+            />
+          </form>
+        </div>
+      </div>
 
-      <div className="flex w-full p-2">
-        {/* <h1 className=""> My Complaints </h1> */}
-        <form className="mb-6 flex items-center justify-center">
-          <Input
-            type="text"
-            placeholder="Search for a complaint ID, customer name, or status"
-            value={searchText}
-            onChange={handleSearchChange}
-            className="w-full max-w-md rounded-lg border-gray-300 shadow-md"
-          />
-        </form>
-    </div>
-
-    {/* All Complaints */}
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {searchText ? (
-        searchedResults.map(complaint => (
-          <ComplaintCard key={complaint._id} complaint={complaint} handleTagClick={handleTagClick} />
-        ))
-      ) : (
-        allComplaints.map(complaint => (
-          <ComplaintCard key={complaint._id} complaint={complaint} handleTagClick={handleTagClick} />
-        ))
-      )}
-    </div>
-  </section>
+      {/* All Complaints */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {searchText ? (
+          searchedResults.map(complaint => (
+            <ComplaintCard key={complaint._id} complaint={complaint} handleTagClick={handleTagClick} />
+          ))
+        ) : (
+          allComplaints.map(complaint => (
+            <ComplaintCard key={complaint._id} complaint={complaint} handleTagClick={handleTagClick} />
+          ))
+        )}
+      </div>
+    </section>
   );
 };
 

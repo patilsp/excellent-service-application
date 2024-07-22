@@ -52,7 +52,7 @@ const MyComplaints = () => {
 
   return (
     <div className='profile'>
-      <h1 className='text-2xl font-bold mb-4'>My Complaints</h1>
+      <h1 className='mb-4 text-2xl font-bold'>My Complaints</h1>
       <p className='mb-8'>
         Welcome to your personalized complaints page. Manage your complaints here, update or delete them as needed.
       </p>

@@ -1,21 +1,16 @@
 "use client"
 import React from 'react'
 import { SignUp } from '@clerk/nextjs'
-import Lottie from"lottie-react";
-import animationData from "@/assets/animation1.json";
 
 const SignUpPage = () => {
   return (
-    <div className="flex justify-between"> 
-      <div className='flex w-full justify-center'>
-        <div className="mt-4 p-4 text-card-foreground">
-          <div className="flex justify-between"> 
-            <Lottie animationData={animationData} />  
-            <SignUp />           
-          </div>            
+    <div className="relative h-screen w-full bg-cover bg-center py-5" style={{ backgroundImage: 'url(/images/banner1.jpg)' }}>
+      <div className="absolute inset-0  opacity-50"></div>
+      <div className="relative z-10 flex h-full w-full items-center justify-center">
+        <div className="container flex justify-center text-center">
+          <SignUp />
         </div>
-      </div>
-    
+    </div>
   </div>
   )
 }

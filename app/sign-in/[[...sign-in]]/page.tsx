@@ -1,24 +1,19 @@
-"use client"
-import React from 'react'
-import { SignIn } from '@clerk/nextjs'
+"use client";
+import React from 'react';
+import { SignIn } from '@clerk/nextjs';
 import Image from 'next/image';
-import Lottie from"lottie-react";
-import animationData from "@/assets/animation1.json";
 
 const SignInPage = () => {
   return (
-    <div className="flex justify-between"> 
-        <div className='flex w-full justify-center'>
-          <div className="p-4 text-card-foreground">
-            <div className="mt-4 flex justify-between"> 
-              <Lottie animationData={animationData} />  
-              <SignIn />              
-            </div>            
-          </div>
+    <div className="relative h-screen w-full bg-cover bg-center py-5" style={{ backgroundImage: 'url(/images/banner1.jpg)' }}>
+      <div className="absolute inset-0  opacity-50"></div>
+      <div className="relative z-10 flex h-full w-full items-center justify-center">
+        <div className="login-block container flex justify-center text-center">
+          <SignIn />
         </div>
-      
+      </div>
     </div>
-  )
+  );
 }
 
-export default SignInPage
+export default SignInPage;

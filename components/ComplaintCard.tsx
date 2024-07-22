@@ -25,21 +25,22 @@ const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) 
 
   const [copied, setCopied] = useState("");
 
-  const handleProfileClick = () => {
-    if (complaint.userId === userId) {
-      return router.push("/userprofile");
-    }
-    router.push(`/userprofile/${complaint.userId}?name=${complaint.userName}`);
+  const handleComplaintClick = () => {
+    console.log('aaa');
+
+    if (complaint.userId === sessionId) return router.push("/profile");
+
+    router.push(`/profile/${complaint.userId}`);
   };
 
   const handleCopy = () => {
-    setCopied(complaint.description);
-    navigator.clipboard.writeText(complaint.description);
+    setCopied(complaint.name);
+    navigator.clipboard.writeText(complaint.name);
     setTimeout(() => setCopied(false), 3000);
   };
 
   return (
-    <Card className="mx-auto mb-6 grid w-full rounded-lg bg-gray-50 p-4 shadow-lg">
+    <Card className="mx-auto mb-6 grid w-full cursor-pointer rounded-lg bg-gray-50 p-4 shadow-lg" onClick={handleComplaintClick}>
       <CardHeader className="flex w-full justify-between gap-4">
         <div
           className="flex cursor-pointer items-center justify-between gap-3"
@@ -80,7 +81,7 @@ const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) 
         <p className='text-sm text-gray-700'>{complaint.model}</p>
       </CardContent>
       
-      {/* {userId === complaint.userId && (
+      {userId === complaint.userId && (
         <CardFooter className='flex gap-4'>
           <Button
             variant="success"
@@ -95,7 +96,7 @@ const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) 
             Delete
           </Button>
         </CardFooter>
-      )} */}
+      )}
     </Card>
   );
 };

@@ -80,7 +80,11 @@
   }
   
 }
-
+.cl-internal-17ydaof{
+  background-color: transparent !important;
+  border: 2px solid white !important;
+  backdrop-filter: blur(10px);
+}
 
 .btn-primary{
   color: #fff;

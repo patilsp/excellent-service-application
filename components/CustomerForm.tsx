@@ -135,16 +135,6 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
             </Select>
           </div>
         </div>
-        <div className="grid gap-2">
-          <Label htmlFor="address">Customer Address</Label>
-          <Textarea
-            value={post.address}
-            onChange={(e) => setPost({ ...post, address: e.target.value })}
-            placeholder='Enter customer address'
-            required
-            className='form_textarea'
-          />
-        </div>
         <div className="flex flex-col gap-4 md:flex-row md:gap-10">
           <div className="grid w-full gap-2">
             <Label htmlFor="area">Place</Label>
@@ -169,6 +159,17 @@ const CustomerForm = ({ type, post, setPost, submitting, handleSubmit }) => {
             />
           </div>
         </div>
+        <div className="grid gap-2">
+          <Label htmlFor="address">Customer Address</Label>
+          <Textarea
+            value={post.address}
+            onChange={(e) => setPost({ ...post, address: e.target.value })}
+            placeholder='Enter customer address'
+            required
+            className='form_textarea'
+          />
+        </div>
+      
 
         <div className='my-4 flex justify-center gap-4'>
           <Link href='/customers' className='flex items-center rounded bg-red-400 p-1 px-4 text-sm text-primary-foreground shadow hover:bg-red-600'>

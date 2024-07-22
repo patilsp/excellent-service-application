@@ -69,7 +69,7 @@ const UserForm = ({ type, post, setPost, submitting, handleSubmit }) => {
   };
 
   return (
-    <section className='flex flex-col md:flex-row'>
+    <section className='flex flex-col py-4 md:flex-row'>
       {/* Image Section */}
       <motion.div
         className="hidden h-full w-1/2 md:flex"
@@ -78,7 +78,7 @@ const UserForm = ({ type, post, setPost, submitting, handleSubmit }) => {
         exit={{ opacity: 0, x: 100 }}
         transition={{ duration: 0.5 }}
       >
-        <Image src="/images/user.png" 
+        <Image src="/images/user-welcome.png" 
         alt="User Image" 
         height={600}
         width={600}
@@ -88,14 +88,20 @@ const UserForm = ({ type, post, setPost, submitting, handleSubmit }) => {
 
       {/* Form Section */}
       <div className="w-full p-4 md:w-1/2">
-        <div className="mt-10 p-4">
-          <h1 className='head_text mt-2 text-center text-xl text-indigo-500'>
+        <div className="mt-10 p-4">         
+          <motion.form
+            onSubmit={handleSubmit}
+            className='glassmorphism mt-2 flex w-full flex-col gap-4 rounded border p-8 shadow'
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+
+          <h1 className='head_text my-2  text-center text-xl'>
             Register User
           </h1>
-          <form
-            onSubmit={handleSubmit}
-            className='glassmorphism mt-5 flex flex-col gap-5 rounded-lg border border-gray-200 p-8 shadow-lg'
-          >
+
+
             <div className="grid gap-2">
               <Label htmlFor="username">User Full Name</Label>
               <Input
@@ -162,7 +168,7 @@ const UserForm = ({ type, post, setPost, submitting, handleSubmit }) => {
                 {submitting ? `${type}ing...` : type}
               </Button>
             </div>
-          </form>
+          </motion.form>
         </div>
       </div>
     </section>

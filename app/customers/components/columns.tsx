@@ -39,7 +39,7 @@ export const columns: ColumnDef<Customer>[] = [
     ),
     cell: ({ row }) => {
       const id = row.getValue("id");
-      const formattedId = Number.isInteger(id) ? `comp-${id}` : `comp-${parseInt(id, 12)}`;
+      const formattedId = Number.isInteger(id) ? `CS-${id}` : `CS-${parseInt(id, 12)}`;
       return <div className="w-[80px]">{formattedId}</div>;
     },
     enableSorting: true,

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const ComplaintCardList = ({ data, handleTagClick }) => {
   return (
-    <div className='mt-12 complaint_layout'>
+    <div className='complaint_layout mt-12'>
       {data.map((complaint) => (
         <ComplaintCard
           key={complaint._id}

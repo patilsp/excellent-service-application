@@ -2,14 +2,13 @@ import Complaint from "@/models/complaint";
 import { connectToDB } from "@/utils/database";
 
 export const POST = async (request) => {
-    const { name, mobile, city, note, complaintType, model} = await request.json();
+    const { userId, name, productType, complaintType, mobile, visitDate, status, address } = await request.json();
 
     try {
         await connectToDB();
-        const newComplaint = new Complaint({ name, mobile, city, note, complaintType, model });
+        const newComplaint = new Complaint({ userId, name, productType, complaintType, mobile, visitDate, status, address });
         await newComplaint.save();
 
-        // Return a simplified response or just the ID of the created complaint
         return new Response(JSON.stringify({ id: newComplaint._id }), { status: 201 });
     } catch (error) {
         console.error('Failed to create a new complaint:', error);

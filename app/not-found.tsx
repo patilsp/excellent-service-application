@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center py-4">
        
       <h1 className="mx-auto text-center">Not Found</h1>     
       <p className="mx-auto my-4 max-w-3xl text-center text-lg text-slate-600 dark:text-slate-400"> Could not find requested resource </p>

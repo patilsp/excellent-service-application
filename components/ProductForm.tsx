@@ -12,15 +12,15 @@ import { Textarea } from "@/registry/new-york/ui/textarea";
 const ProductForm = ({ type, product, setProduct, submitting, handleSubmit }) => {
   return (
     <section className="flex w-full justify-center p-1 md:px-4">
-      <div className="container flex flex-col items-center justify-center gap-6 lg:flex-row lg:p-8">
+      <div className="container flex flex-col items-center justify-center gap-6 p-1 lg:flex-row lg:p-8">
         {/* Image Section */}
         <div className="hidden w-full overflow-hidden md:block lg:w-1/2">
           <Image
             src="/images/alert-2.png"
             alt="Product"
-            width={550}
-            height={550}
-            className="object-cover p-2"
+            width={500}
+            height={500}
+            className="object-cover p-10"
           />
         </div>
 
@@ -28,7 +28,7 @@ const ProductForm = ({ type, product, setProduct, submitting, handleSubmit }) =>
         <div className="w-full rounded-lg border bg-white shadow-lg lg:w-1/2">
           <div className="p-4">
             <h1 className='head_text text-center'>
-              <span className='green_gradient text-xl'>{type} Product</span>
+              <span className='green_gradient text-xl font-bold'>{type} Product</span>
             </h1>
             <p className='py-1 text-center text-sm text-slate-600'>
               Create and Update product here
@@ -59,8 +59,7 @@ const ProductForm = ({ type, product, setProduct, submitting, handleSubmit }) =>
                 <Input
                   value={product.price}
                   onChange={(e) => setProduct({ ...product, price: e.target.value })}
-                  placeholder='Enter product price'
-                  required
+                  placeholder='Enter product price'                  
                   type='number'
                   step='0.01'
                   className='input'
@@ -81,8 +80,7 @@ const ProductForm = ({ type, product, setProduct, submitting, handleSubmit }) =>
                 <Input
                   value={product.capacity}
                   onChange={(e) => setProduct({ ...product, capacity: e.target.value })}
-                  placeholder='Enter product capacity'
-                  required
+                  placeholder='Enter product capacity'                  
                   className='input'
                 />
               </div>
@@ -91,8 +89,7 @@ const ProductForm = ({ type, product, setProduct, submitting, handleSubmit }) =>
                 <Input
                   value={product.technology}
                   onChange={(e) => setProduct({ ...product, technology: e.target.value })}
-                  placeholder='Enter product technology'
-                  required
+                  placeholder='Enter product technology'                  
                   className='input'
                 />
               </div>
@@ -101,23 +98,21 @@ const ProductForm = ({ type, product, setProduct, submitting, handleSubmit }) =>
                 <Input
                   value={product.warranty}
                   onChange={(e) => setProduct({ ...product, warranty: e.target.value })}
-                  placeholder='Enter product warranty'
-                  required
+                  placeholder='Enter product warranty'                  
                   className='input'
                 />
               </div>
-              <div className="grid gap-2">
+             
+            </div>
+            <div className="grid w-full gap-2">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
                   value={product.description}
                   onChange={(e) => setProduct({ ...product, description: e.target.value })}
-                  placeholder='Enter product description'
-                  required
+                  placeholder='Enter product description'                  
                   className='form_textarea'
                 />
               </div>
-            </div>
-
             <div className='mt-6 flex justify-center gap-4'>
               <Link href='/products' className='flex items-center rounded bg-red-400 p-1 px-4 text-sm text-primary-foreground shadow hover:bg-red-600'>
                 Cancel

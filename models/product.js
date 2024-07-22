@@ -10,7 +10,6 @@ const ProductSchema = new Schema({
   },
   price: {
     type: Number,
-    required: [true, 'Product Price is required.'],
   },
   model: {
     type: String,

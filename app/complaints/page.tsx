@@ -8,10 +8,10 @@ import { DataTable } from "./components/data-table";
 
 export default function CustomerPage() {  
   const [allComplaints, setAllComplaints] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   const fetchComplaints = async () => {
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
       const response = await fetch("/api/complaint");
       const data = await response.json();
@@ -25,7 +25,7 @@ export default function CustomerPage() {
     } catch (error) {
       console.error("Failed to fetch complaints:", error);
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
 
@@ -43,7 +43,7 @@ export default function CustomerPage() {
           </p>
         </div>
         <div className="ml-auto">
-          <Link href='register-complaint' className='inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
+          <Link href='create-complaint' className='inline-flex h-8 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'>
             <PlusCircledIcon className="mr-2 h-4 w-4" />
             Add Complaint
           </Link>           

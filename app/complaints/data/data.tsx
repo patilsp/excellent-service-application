@@ -26,25 +26,26 @@ export const names = [
 
 export const statuses = [
   {
-    value: "backlog",
-    label: "Backlog",
-    icon: QuestionMarkCircledIcon,
-  },
-  {
-    value: "todo",
-    label: "Todo",
+    value: "Active",
+    label: "Active",
     icon: CircleIcon,
   },
   {
-    value: "in progress",
-    label: "In Progress",
-    icon: StopwatchIcon,
+    value: "Inactive",
+    label: "Inactive",
+    icon: QuestionMarkCircledIcon,
   },
   {
-    value: "done",
-    label: "Done",
+    value: "Warranty",
+    label: "Warranty",
     icon: CheckCircledIcon,
   },
+  {
+    value: "Out Of Warranty",
+    label: "Out Of Warranty",
+    icon: StopwatchIcon,
+  },
+
   {
     value: "canceled",
     label: "Canceled",

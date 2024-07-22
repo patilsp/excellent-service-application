@@ -1,36 +1,15 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose from "mongoose";
 
-const ComplaintSchema = new Schema({
-
-  id: {
-    type: String,
-  },
-  userId: {
-    type: String,
-  },
-  complaintId: {
-    type: String,
-  },
-  name: {
-    type: String,
-    required: [true, 'Complaint Name is required.'],
-  },
-  mobile: {
-    type: Number,
-    required: [true, 'Complaint Price is required.'],
-  },
-   note: {
-    type: String,
-  },
-  complaintType: {
-    type: String,
-  },
-  model: {
-    type: String,
-  },
-
+const complaintSchema = new mongoose.Schema({
+    userId: { type: String, required: true },
+    productType: { type: String, required: true },
+    complaintType: { type: String, required: true },
+    mobile: { type: Number, required: true },
+    visitDate: { type: Date, required: true },
+    status: { type: String, required: true },
+    address: { type: String, required: true },
 });
 
-const Complaint = models.Complaint || model('Complaint', ComplaintSchema);
+const Complaint = mongoose.models.Complaint || mongoose.model("Complaint", complaintSchema);
 
 export default Complaint;

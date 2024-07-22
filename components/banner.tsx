@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { slideInFromLeft } from "@/utils/motion";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
-import ComplaintForm from "@/components/ComplaintForm";
+import InquiryForm from "@/components/InquiryFrom";
 import toast from "react-hot-toast";
 import {
   Dialog,
@@ -23,7 +23,7 @@ import bannerImage from '../public/images/banner.webp';
 
 export default function Banner() {
   const [submitting, setIsSubmitting] = useState(false);
-  const [complaint, setComplaint] = useState({
+  const [inquiry, setInquiry] = useState({
     name: "",
     mobile: "",
     note: "",
@@ -32,11 +32,11 @@ export default function Banner() {
   });
   const [open, setOpen] = useState(false);
 
-  const createComplaint = async (data) => {
+  const createInquiry = async (data) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/complaint/new", {
+      const response = await fetch("/api/inquiry/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,17 +45,17 @@ export default function Banner() {
       });
 
       if (response.ok) {
-        toast.success("Complaint has been registered successfully! 🔥");
-        setComplaint({
+        toast.success("Inquiry has been registered successfully! 🔥");
+        setInquiry({
           name: "",
           mobile: "",
           note: "",
           model:"",
-          complaintType:"",
+          inquiryType:"",
         });
         setTimeout(() => setOpen(false), 2000);
       } else {
-        console.log(error("Failed to register complaint."));
+        console.log(error("Failed to register inquiry."));
       }
     } catch (error) {
       console.log(error("An error occurred."));
@@ -103,12 +103,12 @@ export default function Banner() {
                     />
                   </div>
                   <div className="md:w-1/2">
-                    <ComplaintForm
+                    <InquiryForm
                       type="Create"
-                      complaint={complaint}
-                      setComplaint={setComplaint}
+                      inquiry={inquiry}
+                      setInquiry={setInquiry}
                       submitting={submitting}
-                      handleSubmit={createComplaint}
+                      handleSubmit={createInquiry}
                     />
                   </div>
                 </div>

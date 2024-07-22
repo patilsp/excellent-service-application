@@ -10,54 +10,45 @@ import { Label } from "@/registry/new-york/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/registry/new-york/ui/select";
 import { Textarea } from "@/registry/new-york/ui/textarea";
 
-const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit }) => {
+const InquiryForm = ({ type, inquiry, setInquiry, submitting, handleSubmit }) => {
   const router = useRouter();
   const { isLoaded, userId } = useAuth();
   const { isSignedIn } = useUser();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    if (!isLoaded || !isSignedIn) {
-      // Redirect to sign-in page if not signed in
-      router.push("/sign-in");
-      return;
-    }
-
     try {
-      // Invoke the handleSubmit function passed as a prop
       handleSubmit(); 
-
-      const response = await fetch("/api/complaint/new", {
+      const response = await fetch("/api/inquiry/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: complaint.name,
-          mobile: complaint.mobile,
-          note: complaint.note,
-          complaintType: complaint.complaintType,
-          model: complaint.model,
+          name: inquiry.name,
+          mobile: inquiry.mobile,
+          note: inquiry.note,
+          inquiryType: inquiry.inquiryType,
+          model: inquiry.model,
         }),
       });
 
       if (response.ok) {
-        toast.success("Complaint has been registered successfully! 🔥");
-        router.push("/");
-        setComplaint({
+        toast.success("Inquiry has been registered successfully! 🔥");
+        router.push("/inquiries");
+        setInquiry({
           name: "",
           mobile: "",
-          complaintType: "",
+          inquiryType: "",
           note: "",
           model: "",
         });
       } else {
-        toast.error("Failed to register complaint.");
+        toast.error("Failed to register Inquiry.");
       }
     } catch (error) {
-      console.error("An error occurred while submitting complaint:", error);
-      toast.error("An error occurred while submitting the complaint.");
+      console.error("An error occurred while submitting Inquiry:", error);
+    //   toast.error("An error occurred while submitting the Inquiry.");
     }
   };
 
@@ -71,8 +62,8 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
         <div className="grid gap-2">
           <Label htmlFor="type">Service Type</Label>
           <Select
-            value={complaint.complaintType}
-            onValueChange={(value) => setComplaint({ ...complaint, complaintType: value })}
+            value={inquiry.inquiryType}
+            onValueChange={(value) => setInquiry({ ...inquiry, inquiryType: value })}
             className='input'
             required
             default='Send Inquiry'
@@ -93,8 +84,8 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
           <Input
-            value={complaint.name}
-            onChange={(e) => setComplaint({ ...complaint, name: e.target.value })}
+            value={inquiry.name}
+            onChange={(e) => setInquiry({ ...inquiry, name: e.target.value })}
             placeholder='Enter customer Name'
             required
             className='input'
@@ -104,8 +95,8 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
         <div className="grid gap-2">
           <Label htmlFor="phone">Phone Number</Label>
           <Input
-            value={complaint.mobile}
-            onChange={(e) => setComplaint({ ...complaint, mobile: e.target.value })}
+            value={inquiry.mobile}
+            onChange={(e) => setInquiry({ ...inquiry, mobile: e.target.value })}
             placeholder='Enter customer phone number'
             required
             className='input'
@@ -115,8 +106,8 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
         <div className="grid gap-2">
           <Label htmlFor="Model">Model Number</Label>
           <Input
-            value={complaint.model}
-            onChange={(e) => setComplaint({ ...complaint, model: e.target.value })}
+            value={inquiry.model}
+            onChange={(e) => setInquiry({ ...inquiry, model: e.target.value })}
             placeholder='Enter Model Number'
             required
             className='input'
@@ -126,9 +117,9 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
         <div className="grid gap-2">
           <Label htmlFor="note">Description</Label>
           <Textarea
-            value={complaint.note}
-            onChange={(e) => setComplaint({ ...complaint, note: e.target.value })}
-            placeholder='Enter complaint note'
+            value={inquiry.note}
+            onChange={(e) => setInquiry({ ...inquiry, note: e.target.value })}
+            placeholder='Enter inquiry note'
             required
             className='form_textarea'
           />
@@ -148,4 +139,4 @@ const ComplaintForm = ({ type, complaint, setComplaint, submitting, handleSubmit
   );
 };
 
-export default ComplaintForm;
+export default InquiryForm;

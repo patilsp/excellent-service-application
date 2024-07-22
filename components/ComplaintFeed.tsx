@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ComplaintCard from "@/components/ComplaintCard"; 
 import { motion } from "framer-motion";
+import { Input } from "@/registry/new-york/ui/input";
 
 const ComplaintCardList = ({ data, handleTagClick }) => {
   return (
@@ -75,28 +76,34 @@ const ComplaintFeed = () => {
   };
 
   return (
-    <section className='feed w-full py-2'>
-      <form className='relative w-full flex-center '>
-        <input
-          type='text'
-          placeholder='Search for a complaint ID, customer name, or status'
-          value={searchText}
-          onChange={handleSearchChange}
-          required
-          className='search_input peer '
-        />
-      </form>
+    <section className="w-full px-6 py-4">
 
-      {/* All Complaints */}
+      <div className="flex w-full p-2">
+        {/* <h1 className=""> My Complaints </h1> */}
+        <form className="mb-6 flex items-center justify-center">
+          <Input
+            type="text"
+            placeholder="Search for a complaint ID, customer name, or status"
+            value={searchText}
+            onChange={handleSearchChange}
+            className="w-full max-w-md rounded-lg border-gray-300 shadow-md"
+          />
+        </form>
+    </div>
+
+    {/* All Complaints */}
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {searchText ? (
-        <ComplaintCardList
-          data={searchedResults}
-          handleTagClick={handleTagClick}
-        />
+        searchedResults.map(complaint => (
+          <ComplaintCard key={complaint._id} complaint={complaint} handleTagClick={handleTagClick} />
+        ))
       ) : (
-        <ComplaintCardList data={allComplaints} handleTagClick={handleTagClick} />
+        allComplaints.map(complaint => (
+          <ComplaintCard key={complaint._id} complaint={complaint} handleTagClick={handleTagClick} />
+        ))
       )}
-    </section>
+    </div>
+  </section>
   );
 };
 

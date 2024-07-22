@@ -4,7 +4,7 @@ import ComplaintFeed  from "@/components/ComplaintFeed"
 
 export default function page() {
   return (
-    <div>
+    <div className="main">
       <ComplaintFeed />
     </div>
   )

@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site"
 
 export function SiteFooter() {
   return (     
-    <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 md:px-8 md:py-0">
+    <footer className=" bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 md:px-8 md:py-0">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>

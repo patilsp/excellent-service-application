@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSession } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs"; 
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/registry/new-york/ui/card";
@@ -10,17 +10,26 @@ import { format } from "date-fns";
 import { motion } from "framer-motion";
 
 const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) => {
-  const { data: session } = useSession();
+ 
+  
   const pathName = usePathname();
   const router = useRouter();
+
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isSignedIn, user } = useUser();
+
+  const userName = user?.fullName || "User Name";
+  const userProfileImage = user?.profileImageUrl || "/images/avatar.png";
+  const userMobile = user?.phone || "";
+
 
   const [copied, setCopied] = useState("");
 
   const handleProfileClick = () => {
-    if (complaint.creator?._id === session?.user.id) {
+    if (complaint.userId === userId) {
       return router.push("/userprofile");
     }
-    router.push(`/userprofile/${complaint.creator?._id}?name=${complaint.creator?.username}`);
+    router.push(`/userprofile/${complaint.userId}?name=${complaint.userName}`);
   };
 
   const handleCopy = () => {
@@ -30,39 +39,32 @@ const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) 
   };
 
   return (
-    <Card className="grid max-w-sm mx-auto mb-6 p-4 bg-white shadow-lg rounded-lg">
-      <CardHeader className="flex items-start justify-between gap-4">
+    <Card className="mx-auto mb-6 grid w-full rounded-lg bg-gray-50 p-4 shadow-lg">
+      <CardHeader className="flex w-full justify-between gap-4">
         <div
-          className="flex justify-between cursor-pointer items-center gap-3"
-          onClick={handleProfileClick}
-        >
-          <Image
-            src="/avatars/01.png"
-            alt='user_image'
-            width={40}
-            height={40}
-            className='rounded-full object-contain'
-          />
+          className="flex cursor-pointer items-center justify-between gap-3"
          
+        >
+        <p className='text-xl font-bold text-gray-800'>{complaint.name}</p>
         <div className='relative'>
           <Button
             variant="outline"
             onClick={handleCopy}
-            className="p-1"
+            className="p-1 px-2"
           >
             <Image
               src={
-                copied === complaint.description
+                copied === complaint.name
                   ? "/icons/tick.svg"
                   : "/icons/copy.svg"
               }
-              alt={copied === complaint.description ? "tick_icon" : "copy_icon"}
+              alt={copied === complaint.name ? "tick_icon" : "copy_icon"}
               width={16}
               height={16}
             />
           </Button>
           {copied && (
-            <span className="absolute top-0 right-0 bg-gray-800 text-white text-xs p-1 rounded">
+            <span className="absolute right-0 top-0 rounded bg-gray-800 p-1 text-xs text-white">
               Copied!
             </span>
           )}
@@ -72,13 +74,13 @@ const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) 
       </CardHeader>
       
       <CardContent className="my-4">
-        <p className='text-sm text-gray-700'>{complaint.name}</p>
-        <p className='text-sm text-gray-700'>{complaint.email}</p>
+        
+        <p className='text-sm text-gray-700'>{complaint.address}</p>
         <p className='text-sm text-gray-700'>{complaint.mobile}</p>
-        <p className='text-sm text-gray-700'>{complaint.note}</p>
+        <p className='text-sm text-gray-700'>{complaint.model}</p>
       </CardContent>
       
-      {session?.user.id === complaint.creator?._id && pathName === "/profile" && (
+      {/* {userId === complaint.userId && (
         <CardFooter className='flex gap-4'>
           <Button
             variant="success"
@@ -93,7 +95,7 @@ const ComplaintCard = ({ complaint, handleEdit, handleDelete, handleTagClick }) 
             Delete
           </Button>
         </CardFooter>
-      )}
+      )} */}
     </Card>
   );
 };

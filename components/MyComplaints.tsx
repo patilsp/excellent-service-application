@@ -3,7 +3,7 @@
 import { useSession } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import ComplaintCard from "@components/ComplaintCard";
+import ComplaintCard from "@/components/ComplaintCard";
 
 const MyComplaints = () => {
   const router = useRouter();
